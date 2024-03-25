@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
  <!-- NAV -->
  <ul class="nav col-12 col-lg-10 fw-bold">
     <li><a href="#" class="nav-link link-dark selected">Trang chủ</a></li>

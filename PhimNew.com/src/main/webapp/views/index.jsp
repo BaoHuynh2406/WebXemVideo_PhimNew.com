@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,18 +32,20 @@
 
 <body ng-app="indexPage" ng-controller="myCtrl">
     <!-- Header -->
-    <header class="header p-3 mb-1 border-bottom " id="header" ng-include="'includes/header.html'"> </header>
+    <header class="header p-3 mb-1 border-bottom " id="header" > 
+    	<%@include file="layout/header.jsp" %>
+    </header>
 
     <main>
-        <ng-view></ng-view>
+        <%@include file="layout/HomePage.jsp" %>
     </main>
 
 
 
 
     <!-- Footer -->
-    <footer class="text-center text-lg-start text-white" style="background-color: #1c2331"
-        ng-include="'/includes/footer.html'">
+    <footer class="text-center text-lg-start text-white" style="background-color: #1c2331">
+    <%@include file="layout/footer.jsp" %>
 
     </footer>
     <!-- Footer -->

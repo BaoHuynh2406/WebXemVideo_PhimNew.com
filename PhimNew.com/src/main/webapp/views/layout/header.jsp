@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <section class="container">
     <div class="d-flex flex-wrap align-items-center justify-content-between ">
         <!-- LOGO -->
@@ -7,8 +9,8 @@
             <span class="ms-3 fw-bold fs-5">PhimNew.com </span>
         </a>
 
-        <div class="nav col-12 col-lg-9 me-lg-auto mb-2 mb-md-0 align-items-center" ng-include="'includes/navBar.html'">
-
+        <div class="nav col-12 col-lg-9 me-lg-auto mb-2 mb-md-0 align-items-center">
+			<%@include file="navbar.jsp" %>
         </div>
     </div>
 </section>
