@@ -56,7 +56,7 @@
         <!-- Nội dung -->
         <div class="row Block px-3 justify-content-between">
 
-           <jsp:include page="item_video.jsp"></jsp:include>
+           <jsp:include page="layout/item_video.jsp"></jsp:include>
 
 
 
