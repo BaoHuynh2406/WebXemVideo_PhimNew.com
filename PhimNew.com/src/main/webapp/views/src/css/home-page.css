@@ -1,0 +1,251 @@
+a{
+    text-decoration: none;
+}
+/* Card custom */
+.card {
+    border-radius: 10px
+}
+
+
+.card-custom {
+    overflow: hidden;
+    height: 400px;
+    box-sizing: border-box;
+    margin-left: 5px;
+    box-shadow: 0 0 15px rgba(10, 10, 10, 0.3);
+    transition: all 300ms;
+}
+
+.card-custom:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 0 25px rgba(10, 10, 10, 0.5);
+}
+
+
+
+/* First border-left-width setting is a fallback */
+.card-custom-img::after {
+    position: absolute;
+    content: '';
+    top: 161px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-top-width: 40px;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 545px;
+    border-left-width: calc(575px - 5vw);
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: inherit;
+}
+
+.card-custom-avatar img {
+    border-radius: 50%;
+    box-shadow: 0 0 15px rgba(10, 10, 10, 0.3);
+    position: absolute;
+    top: 100px;
+    left: 1.25rem;
+    width: 100px;
+    height: 100px;
+}
+
+
+.c-details span {
+    font-weight: 300;
+    font-size: 13px
+}
+
+.icon {
+    width: 50px;
+    height: 50px;
+    background-color: #eee;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon img{
+    width: 50px;
+    height: 50px;
+    border-radius: 15px;
+}
+
+.badge {
+    background-color: #fffbec;
+    height: 25px;
+    padding-bottom: 3px;
+    border-radius: 5px;
+    display: flex;
+    color: #dba800;
+    justify-content: center;
+    align-items: center
+}
+
+.progress {
+    height: 10px;
+    border-radius: 10px
+}
+
+
+
+.text1 {
+    font-size: 14px;
+    font-weight: 600
+}
+
+.text2 {
+    color: #a5aec0
+}
+
+
+/* End card custom */
+
+/* Header */
+.header {
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.header__titile {
+    font-size: 18px;
+
+}
+
+.selected{
+    color: #1e54a4 !important;
+}
+
+/* End header */
+
+.Block-user {
+    margin-top: 90px;
+    width: 100%;
+    padding: 3rem 0;
+    background-color: #1e2a55;
+}
+
+
+@media screen and (max-width: 1200px) {
+    .header{
+        position: relative;
+    }
+
+    .Block-user{
+        margin-top: 10px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .marginTop {
+        margin-top: 20px;
+    }
+
+    .header{
+        position: relative;
+    }
+}
+
+
+
+.result {
+    color: #f6ff00;
+    font-weight: 700;
+    font-size: 32px;
+}
+
+
+
+/* Titile of Block */
+
+.home-section{
+    margin-top: 80px;
+    margin-bottom: 40px;
+}
+
+.tabs-control{
+    display: flex;
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #65656d;
+    cursor: pointer;
+}
+
+
+.select li{
+    position: relative;
+    font-weight: bold;
+    margin-right: 30px;
+}
+
+.selection{
+    color: #1e54a4;
+    font-weight: bold;
+}
+
+.tabs-control li::after {
+    width: 0;
+}
+
+.tabs-control li::after {
+    bottom: -5px;
+    left: 0;
+    background: #0e2952;
+    border-radius: 2px;
+    content: '';
+    height: 3px;
+    width: 0;
+    display: block;
+    transition: all 300ms;
+    position: absolute;
+}
+
+.tabs-control .selection::after{
+    width: 80%;
+}
+
+.tabs-control li{
+    transition: all 300ms;
+}
+
+.tabs-control li:hover{
+    color: #1e54a4;
+    
+}
+
+li{
+    cursor: pointer;
+}
+
+li:hover{
+    color: #688ec4;
+}
+
+.tabs-control li:not(.selection):hover::after {
+    width: 80%;
+}
+
+.Block{
+    padding: 20px 10px;
+    background-color: #f7f7f7;
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(10, 10, 10, 0.2);
+}
+
+
+/* table */
+.header_row th{
+    background-color: #1e4278;
+    color: #ececec;
+}

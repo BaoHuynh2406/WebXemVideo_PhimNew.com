@@ -1,0 +1,21 @@
+.Block-info{
+    margin-top: 90px;
+    width: 100%;
+    padding: 1rem 0;
+    background-color: #e7e7e7;
+
+}
+
+ul{
+    list-style: none;
+}
+
+.lesson__item li{
+    list-style: none;
+    font-weight: normal;
+    margin: 10px 0;
+}
+
+.lesson__item li:hover a{
+    color: rgb(68, 166, 226)  !important;
+}
