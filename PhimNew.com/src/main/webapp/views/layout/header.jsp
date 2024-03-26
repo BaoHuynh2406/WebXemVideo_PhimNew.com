@@ -5,7 +5,7 @@
         <!-- LOGO -->
         <a href="/"
             class="d-flex align-items-center mb-2 col-12 col-lg-3 mb-lg-0 text-dark text-decoration-none">
-            <img src="src/img/logo12.png" width="50" height="50" alt="logo">
+            <img src="views/src/img/logo12.png" width="50" height="50" alt="logo">
             <span class="ms-3 fw-bold fs-5">PhimNew.com </span>
         </a>
 

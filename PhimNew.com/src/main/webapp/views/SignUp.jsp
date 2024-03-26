@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,18 +41,18 @@
                 <img src="src/img/Insurance-amico.svg" class="img-fluid img-panner" alt="img" width="500px">
             </div>
             <div class="card px-5 py-4 col-sm-12 col-md-9 col-lg-7 col-xl-5 offset-xl-1">
-                <form name="frmdk">
-                    <h3 class="text-center mb-5">Đăng Kí</h3>
+                
+                <form name="frmdk" action="/SignUp" method="post">
+                    <h3 class="text-center mb-5">Đăng Ký</h3>
                     <!-- Username input -->
                     <div class="form-outline mb-3">
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"> <i class="fas fa-user"></i></span>
-                            <input type="text" required ng-minlength="3" ng-model="Student.username" name="username"
+                            <input type="text" required ng-minlength="6"  name="userName"
                                  placeholder="nguyenvannam123" class="form-control" />
                         </div>
                         <label class="form-label" for="username">Tên đăng nhập <i style="color: red;">*</i></label>
-                        <label ng-show="frmdk.username.$invalid" class="text-danger" for="username">
-                            , Bạn phải nhập ít nhất 3 kí tự!</label>
+                       
                     </div>
 
 
@@ -57,49 +60,45 @@
                     <div class="form-outline mb-3">
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-lock"></i></span>
-                            <input required ng-minlength="6" ng-model="Student.password" name="password" type="password"
+                            <input required ng-minlength="6" name="password" type="password"
                                 class="form-control " />
                         </div>
                         <label class="form-label" for="password">Mật khẩu <i style="color: red;">*</i></label>
-                        <label ng-show="frmdk.password.$invalid" class="text-danger" for="password">
-                            , Bạn phải nhập ít nhất 6 kí tự!</label>
+                        
                     </div>
 
                     <!-- Password Repat -->
                     <div class="form-outline mb-3">
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-redo-alt"></i></span>
-                            <input name="Repasss" ng-model="Repasss"  type="password" class="form-control " />
+                            <input name="Repasss"  type="password" class="form-control " />
                         </div>
                         <label class="form-label" for="form1Example23">Nhập lại mật khẩu <i
                                 style="color: red;">*</i></label>
-                        <label ng-show="Repasss != Student.password" class="text-danger" for="Repasss">
-                            , Mật khẩu nhập lại không đúng!</label>
+                        
                     </div>
 
                     <!-- Email input -->
                     <div class="form-outline mb-3">
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"> <i class="fas fa-envelope"></i></span>
-                            <input type="email" name="email" ng-model="Student.email" required placeholder="abc@123.com"
+                            <input type="email" name="email" required placeholder="abc@123.com"
                                 class="form-control" />
                         </div>
-                        <label class="form-label" for="email">Địa chỉ email <i style="color: red;">*</i></label>
-                        <label class="text-danger" for="email" ng-show="frmdk.email.$invalid">
-                            , chưa nhập email hoặc email sai định dạng!</label>
+                        <label class="form-label" for="email">Email:<i style="color: red;">*</i></label>
+                      
                     </div>
 
 
-                    <!-- Tên Của Bạn -->
+                    <!-- Full name -->
                     <div class="form-outline mb-3">
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-id-badge"></i></span>
-                            <input type="text" name="fullName" required ng-model="Student.fullname"
+                            <input type="text" name="fullName" required 
                                 placeholder="Nguyen Van A" class="form-control " />
                         </div>
                         <label class="form-label" for="form1Example23">Tên của bạn: <i style="color: red;">*</i></label>
-                        <label class="text-danger" for="fullName" ng-show="frmdk.fullName.$invalid">
-                            , chưa nhập tên!</label>
+                       
                     </div>
 
 
@@ -110,7 +109,7 @@
                             <label class="form-check-label me-5" for="sex">Giới tính:</label>
 
 
-                            <input ng-model="Student.gender" class="form-check-input" style="float: none;" checked="true" type="radio" name="gender"
+                            <input class="form-check-input" style="float: none;" checked="true" type="radio" name="gender"
                                 id="nam">
                             <label class="form-check-label me-5" for="nam">
                                 Nam
@@ -118,7 +117,7 @@
 
                             <input class="form-check-input" style="float: none;" type="radio" name="gender" id="nu">
                             <label class="form-check-label" for="nu">
-                                Nữ
+                                Nữ¯
                             </label>
                         </div>
                     </div>
@@ -128,19 +127,18 @@
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"> <i class="fas fa-birthday-cake"></i>
                             </span>
-                            <input type="date" required name="date" ng-model="Student.birthday" class="form-control " />
+                            <input type="date" required name="date" class="form-control " />
                         </div>
-                        <label class="form-label" for="form1Example23">Ngày sinh
+                        <label class="form-label" for="form1Example23">Ngày sinh:
                             <i style="color: red;">*</i>
                         </label>
-                        <label class="text-danger" for="email" ng-show="frmdk.date.$invalid">, chưa nhập ngày sinh hoặc
-                            sai định dạng!</label>
+                      
                     </div>
 
                     <!-- Submit button -->
-                    <button type="submit" ng-click="dangky()" class="btn btn-primary btn-lg btn-block w-100 mb-4">Đăng Kí</button>
+                    <button type="submit"  class="btn btn-primary btn-lg btn-block w-100 mb-4">Đăng ký</button>
 
-                    <span>Đã có tài khoản? <a href="login.html">đăng nhập ngay</a></span>
+                    <span>Đã có tài khoản? <a href="login.html">Đăng nhập ngay</a></span>
 
                 </form>
             </div>

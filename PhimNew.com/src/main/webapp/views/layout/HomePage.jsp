@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<section class="home-section" style="height: 600px;" ng-controller="myCtrl">
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fm" %>
+    
+<section class="home-section" style="height: 600px;" >
     <div id="carouselExampleCaptions" class="carousel slide h-100">
         <div class="carousel-indicators">
           <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -9,21 +12,21 @@
         </div>
         <div class="carousel-inner h-100">
           <div class="carousel-item active">
-            <img src="src/img/2-1-06204547.jpg" class="d-block w-100" alt="...">
+            <img src="views/src/img/2-1-06204547.jpg" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
               <h5>First slide label</h5>
               <p>Some representative placeholder content for the first slide.</p>
             </div>
           </div>
           <div class="carousel-item h-100">
-            <img src="src/img/4629787_cover_endgamex-1.jpg" class="d-block w-100" alt="...">
+            <img src="views/src/img/4629787_cover_endgamex-1.jpg" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
               <h5>Second slide label</h5>
               <p>Some representative placeholder content for the second slide.</p>
             </div>
           </div>
           <div class="carousel-item h-100">
-            <img src="src/img/mai.jpg" class="d-block w-100" alt="...">
+            <img src="views/src/img/mai.jpg" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
               <h5>Third slide label</h5>
               <p>Some representative placeholder content for the third slide.</p>
@@ -54,15 +57,17 @@
             <li>Đã xem</li>
         </ul>
         <!-- Nội dung -->
-        <div class="row Block px-3 justify-content-between">
-
-           <jsp:include page="layout/item_video.jsp"></jsp:include>
-
-
-
-
-
-        </div>
-    </div>
+		<div class="row Block px-3 justify-content-between">
+				<c:forEach var="v" items="${LIST_VIDEO}">
+					<jsp:include page="/views/layout/item_video.jsp">
+						<jsp:param value="${v.title}" name="title" />
+						<jsp:param value="${v.des}" name="des" />
+						<jsp:param value="${v.photo}" name="img" />
+						<jsp:param value="${v.views}" name="views" />
+						<jsp:param value="${v.likes}" name="like" />
+					</jsp:include>
+				</c:forEach>
+		</div>
+	</div>
 </section>
 <!-- End Block Khóa học -->

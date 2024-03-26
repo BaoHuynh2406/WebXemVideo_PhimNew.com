@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fm" %>
+    
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +12,7 @@
 
     <title>PhimNew.com</title>
 
-    <link rel="icon" type="image/x-icon" href="src/img/logo12.png">
+    <link rel="icon" type="image/x-icon" href="views/src/img/logo12.png">
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -20,7 +23,7 @@
     <!-- Google Fonts Roboto -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
     <!-- CSS -->
-    <link rel="stylesheet" href="src/css/home-page.css">
+    <link rel="stylesheet" href="views/src/css/home-page.css">
 
     <!-- Angular JS-->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
@@ -30,7 +33,7 @@
 
 </head>
 
-<body ng-app="indexPage" ng-controller="myCtrl">
+<body >
     <!-- Header -->
     <header class="header p-3 mb-1 border-bottom " id="header" > 
     	<%@include file="layout/header.jsp" %>
@@ -53,8 +56,6 @@
 
 </body>
 
-<script src="src/Js/index.js"></script>
-
-
+<script src="views/src/Js/index.js"></script>
 
 </html>
