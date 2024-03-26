@@ -24,7 +24,7 @@
 	<div class="container mt-5">
 		<h1 class="text-center mb-4">User List</h1>
 		<div class="d-flex justify-content-center mb-4">
-			<button type="button" class="btn btn-success">Add Users</button>
+			<a  href="./UserList?action=AddOrEdit" type="button" class="btn btn-success">Add Users</a>
 		</div>
 		<table class="table table-bordered">
 			<thead>
@@ -50,8 +50,15 @@
 						<td>${user.gender ? "Nam" : "Nữ" }</td>
 						<td><fm:formatDate value="${user.date }" pattern="dd/MM/yyyy"/> </td>
 						<td>
-							<button type="button" class="btn btn-primary btn-sm">Edit</button>
-							<button type="button" class="btn btn-danger btn-sm ms-2">Del</button>
+							<a
+							href="./UserList?action=AddOrEdit&username=${user.userName}"
+							class="btn btn-primary btn-sm btn-action"> <i
+								class="fas fa-edit"></i> Edit </a> 
+							<a
+								href="./UserList?action=Delete&username=<c:out value='${user.userName}'/>"
+								class="btn btn-danger btn-sm btn-action ml-1"> <i
+									class="fas fa-trash-alt"></i> Delete
+							</a>
 						</td>
 					</tr>
 				</c:forEach>

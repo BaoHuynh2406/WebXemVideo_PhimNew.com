@@ -116,7 +116,7 @@
 
 					</div>
 
-					<span>Chưa có tài khoản? <a href="/SignUp">đăng kí ngay</a></span>
+					<span>Chưa có tài khoản? <a href="./SignUp">đăng kí ngay</a></span>
 
 
 				</div>

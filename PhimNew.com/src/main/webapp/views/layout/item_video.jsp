@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt"%>
 <!-- Item -->
-<div class="col-sm-12 col-md-6 col-lg-4 mb-5">
+<a href="./video?id=${param.title }"
+	class="col-sm-12 col-md-6 col-lg-4 mb-5">
 	<div class="card card-custom l-bg-cherry px-0">
 		<img src="views/src/img/${param.img}" class="card-img-top" alt="...">
 		<div class="card-body" style="height: 200px; overflow-y: hidden;">
@@ -15,6 +18,6 @@
 				class="ms-1 bi bi-heart-fill"></i></span>
 		</div>
 	</div>
-</div>
+</a>
 
 <!-- End Item -->

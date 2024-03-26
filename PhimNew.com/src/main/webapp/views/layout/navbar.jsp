@@ -4,7 +4,7 @@
  <ul class="nav col-12 col-lg-10 fw-bold">
     <li><a href="#" class="nav-link link-dark selected">Trang chủ</a></li>
     <li><a href="Course.html" class="nav-link link-dark">Yêu thích</a></li>
-    <li><a href="Course.html" class="nav-link link-dark">Quản lý</a></li>
+    <li><a href="./UserList" class="nav-link link-dark">Quản lý</a></li>
     <li class="dropdown">
         <a class="nav-link link-dark dropdown-toggle" href="#" role="button"
             data-bs-toggle="dropdown" aria-expanded="false">

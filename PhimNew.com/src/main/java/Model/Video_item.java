@@ -3,7 +3,7 @@ package Model;
 public class Video_item {
 		private String title;
 		private String des;
-		private String photo;
+		private String photo, url;
 		private int views;
 		private int likes;
 		public String getTitle() {
@@ -36,14 +36,22 @@ public class Video_item {
 		public void setLikes(int likes) {
 			this.likes = likes;
 		}
-		public Video_item(String title, String des, String photo, int views, int likes) {
+		public Video_item(String title, String des, String photo, String url, int views, int likes) {
 			super();
 			this.title = title;
 			this.des = des;
 			this.photo = photo;
+			this.url = url;
 			this.views = views;
 			this.likes = likes;
 		}
+		public String getUrl() {
+			return url;
+		}
+		public void setUrl(String url) {
+			this.url = url;
+		}
+	
 		
 		
 }

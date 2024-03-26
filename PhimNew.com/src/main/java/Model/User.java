@@ -55,5 +55,8 @@ public class User {
 		this.gender = gender;
 		this.date = date;
 	}
+	public User() {
+		// TODO Auto-generated constructor stub
+	}
 	
 }

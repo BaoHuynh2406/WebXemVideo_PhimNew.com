@@ -9,8 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tạo tài khoản</title>
 
-    <link rel="icon" type="image/x-icon" href="src/img/logo12.png">
-    <link rel="stylesheet" href="src/css/login.css"> 
+    <link rel="icon" type="image/x-icon" href="views/src/img/logo12.png">
+    <link rel="stylesheet" href="views/src/css/login.css"> 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -29,7 +29,7 @@
     <div class="d-flex flex-wrap align-items-center justify-content-between " style="height: 80px;">
         <!-- LOGO -->
         <a href="/" class="d-flex align-items-center mb-2 col-12 col-lg-3 mb-lg-0 text-dark text-decoration-none">
-            <img src="src/img/logo12.png" width="50" height="50" alt="logo">
+            <img src="views/src/img/logo12.png" width="50" height="50" alt="logo">
             <span class="ms-3 fw-bold fs-5">PhimNew.com </span>
         </a>
     </div>
@@ -38,7 +38,7 @@
     <div class="container  h-100">
         <div class="row d-flex align-items-center justify-content-center h-100">
             <div class="col-sm-0 col-md-4 col-lg-4 col-xl-6">
-                <img src="src/img/Insurance-amico.svg" class="img-fluid img-panner" alt="img" width="500px">
+                <img src="views/src/img/Insurance-amico.svg" class="img-fluid img-panner" alt="img" width="500px">
             </div>
             <div class="card px-5 py-4 col-sm-12 col-md-9 col-lg-7 col-xl-5 offset-xl-1">
                 
@@ -138,7 +138,7 @@
                     <!-- Submit button -->
                     <button type="submit"  class="btn btn-primary btn-lg btn-block w-100 mb-4">Đăng ký</button>
 
-                    <span>Đã có tài khoản? <a href="login.html">Đăng nhập ngay</a></span>
+                    <span>Đã có tài khoản? <a href="./login">Đăng nhập ngay</a></span>
 
                 </form>
             </div>

@@ -14,22 +14,22 @@
           <div class="carousel-item active">
             <img src="views/src/img/2-1-06204547.jpg" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
-              <h5>First slide label</h5>
-              <p>Some representative placeholder content for the first slide.</p>
+              <h5>Kungfu Panda</h5>
+              <p>Xem ngày 23/3 sale off 50%.</p>
             </div>
           </div>
-          <div class="carousel-item h-100">
-            <img src="views/src/img/4629787_cover_endgamex-1.jpg" class="d-block w-100" alt="...">
+          <a href="" class="carousel-item h-100">
+            <img  src="views/src/img/4629787_cover_endgamex-1.jpg" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
-              <h5>Second slide label</h5>
-              <p>Some representative placeholder content for the second slide.</p>
+              <h5>End Game</h5>
+              <p>Top 1 trending in USA.</p>
             </div>
-          </div>
+          </a>
           <div class="carousel-item h-100">
             <img src="views/src/img/mai.jpg" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
-              <h5>Third slide label</h5>
-              <p>Some representative placeholder content for the third slide.</p>
+              <h5>Mai</h5>
+              <p>Top 1 trending in Việt Nam</p>
             </div>
           </div>
         </div>
@@ -63,6 +63,7 @@
 						<jsp:param value="${v.title}" name="title" />
 						<jsp:param value="${v.des}" name="des" />
 						<jsp:param value="${v.photo}" name="img" />
+						<jsp:param value="${v.url}" name="url" />
 						<jsp:param value="${v.views}" name="views" />
 						<jsp:param value="${v.likes}" name="like" />
 					</jsp:include>
