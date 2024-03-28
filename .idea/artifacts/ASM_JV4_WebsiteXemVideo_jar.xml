@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ASM_JV4_WebsiteXemVideo:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ASM_JV4_WebsiteXemVideo_jar</output-path>
+    <root id="archive" name="ASM_JV4_WebsiteXemVideo.jar" />
+  </artifact>
+</component>
