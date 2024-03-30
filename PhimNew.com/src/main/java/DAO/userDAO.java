@@ -7,101 +7,119 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import Model.User;
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+
+import Entity.User;
 
 public class userDAO {
 	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-	private List<User> ls;
-	
-	
-	
-	
+	private EntityManager em = Utils.JpaUtils.getEntityManager();
 
-	public userDAO() {
-		ls=new ArrayList<User>();
-		ls = data();
-	}
-
-	public List<User> data()  {
+	
+//	Them nhan vien moi
+	public User create(User entity) {
 		try {
-			ls.add(new User("SV0001", "baohuynh123", "Huỳnh Bảo", "baobao@gmail.com", true,
-					dateFormat.parse("24/06/2004")));
+			// Chuyển đổi ngày tháng từ chuỗi sang kiểu Date
+            String dateString = dateFormat.format(entity.getDate());
+            Date date = dateFormat.parse(dateString);
+            entity.setDate(date);
+			
+			em.getTransaction().begin();
 
-			ls.add(new User("SV0002", "baohuynh123", "Le Nam", "baobao@gmail.com", true,
-					dateFormat.parse("24/06/2001")));
+			em.persist(entity);// them
 
-			ls.add(new User("SV0003", "baohuynh123", "Văn Dũng", "baobao@gmail.com", false,
-					dateFormat.parse("24/06/2003")));
-			return ls;
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println(e.getMessage());
-			return null;
+			em.getTransaction().commit();
+			return entity;
+		} catch (Exception e) {
+
+			em.getTransaction().rollback();
+			throw new RuntimeException(e);
+			// TODO: handle exception
 		}
 	}
 
-	public List<User> getAll(){
-		return ls;
-	}
 	
-	 public void insert(User u) {
-	        ls.add(u);
-	    }
+//	Cap nhat nhan vien
+	public User update(User entity) {
+		try {
+			em.getTransaction().begin();
 
-	    public User findByUsername(String username) {
-	        for (User user : ls) {
-	            if (user.getUserName().equals(username)) {
-	                return user;
-	            }
-	        }
-	        return null;
-	    }
+			em.merge(entity); // ham sua
+			em.getTransaction().commit();
+			return entity;
+		} catch (Exception e) {
+			em.getTransaction().rollback();
+			throw new RuntimeException(e);
+			// TODO: handle exception
+		}
+	}
 
-	    public User save(User user) {
-	        User existingUser = findByUsername(user.getUserName());
-	        if (existingUser != null) {
-	            // Update user
-	            existingUser.setPassword(user.getPassword());
-	            existingUser.setFullName(user.getFullName());
-	            existingUser.setGender(user.isGender());
-	            // Kiểm tra và cập nhật ngày sinh nếu ngày được gửi từ form là đúng
-	            if (user.getDate() != null) {
-	                existingUser.setDate(user.getDate());
-	            }
-	            return existingUser;
-	        } else {
-	            // Insert new user
-	            ls.add(user);
-	            return user;
-	        }
-	    }
+	
+//	Xoa nhan vien
+	public User remove(String id) {
+		try {
+			em.getTransaction().begin();
+			User entity = this.findById(id);
 
-	    public boolean delete(String username) {
-	        Iterator<User> iterator = ls.iterator();
-	        while (iterator.hasNext()) {
-	            User user = iterator.next();
-	            if (user.getUserName().equals(username)) {
-	                iterator.remove();
-	                return true;
-	            }
-	        }
-	        return false;
-	    }
-	    public User edit(User editedUser) {
-	        User existingUser = findByUsername(editedUser.getUserName());
-	        if (existingUser != null) {
-	            // Cập nhật thông tin người dùng
-	            existingUser.setPassword(editedUser.getPassword());
-	            existingUser.setFullName(editedUser.getFullName());
-	            existingUser.setGender(editedUser.isGender());
-	            // Kiểm tra và cập nhật ngày sinh nếu ngày được gửi từ form là đúng
-	            if (editedUser.getDate() != null) {
-	                existingUser.setDate(editedUser.getDate());
-	            }
-	            return existingUser;
-	        } else {
-	            return null; 
-	        }
-	    }
+			em.remove(entity);
+			em.getTransaction().commit();
+			return entity;
+		} catch (Exception e) {
+			em.getTransaction().rollback();
+			throw new RuntimeException(e);
+			// TODO: handle exception
+		}
+	}
+
+	
+//	Tim nhan vien theo ID
+	public User findById(String id) {
+		return em.find(User.class, id);
+	}
+
+//	Tim Nhan vien theo rolde
+	public List<User> findByRole(boolean role) {
+		String jpql = "Select o from User o where o.admin=:role1";
+		TypedQuery<User> query = em.createQuery(jpql, User.class);
+		query.setParameter("role1", role);
+		return query.getResultList();
+	}
+
+	public List<User> findByKeyWord(String keyword) {
+		String jpql = "Select o from User o where o.fullname like ?0";
+		TypedQuery<User> query = em.createQuery(jpql, User.class);
+		query.setParameter(0, keyword);
+		return query.getResultList();
+	}
+
+	public User findOne(String username, String password) {
+		String jpql = "Select o from User o where o.id=:id and o.password=:pass";
+		TypedQuery<User> query = em.createQuery(jpql, User.class);
+		query.setParameter("id", username);
+		query.setParameter("pass", password);
+		return query.getSingleResult();
+	}
+
+	public User findByEmail(String email) {
+		String jpql = "Select o from User o where o.email=:email";
+		TypedQuery<User> query = em.createQuery(jpql, User.class);
+		query.setParameter("email", email);
+		return query.getSingleResult();
+	}
+
+	public List<User> findPage(int page, int size) {
+		String jpql = "Select o from User o";
+		TypedQuery<User> query = em.createQuery(jpql, User.class);
+		query.setFirstResult(page * size);
+		query.setMaxResults(size);
+		return query.getResultList();
+	}
+
+	// lấy hết usser lên
+	public List<User> findAll() {
+		String jpql = "Select o from User o";
+		TypedQuery<User> query = em.createQuery(jpql, User.class);
+		return query.getResultList();
+	}
 }

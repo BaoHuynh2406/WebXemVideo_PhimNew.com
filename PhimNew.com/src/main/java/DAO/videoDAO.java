@@ -3,7 +3,7 @@ package DAO;
 import java.util.ArrayList;
 import java.util.List;
 
-import Model.Video_item;
+import Entity.Video_item;
 
 public class videoDAO {
 	List<Video_item> ls = new ArrayList<Video_item>();

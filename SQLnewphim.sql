@@ -12,17 +12,18 @@ CREATE TABLE Video (
 );
 
 CREATE TABLE Users (
-    Id INT IDENTITY(1,1) PRIMARY KEY,
+    Id varchar(50) PRIMARY KEY,
     Password NVARCHAR(255),
     Email NVARCHAR(255) UNIQUE,
+	Gender bit,
     Fullname NVARCHAR(255),
-    Admin BIT,
-	Active BIT default 1,
+	Date date,
+    Admin BIT
 );
 
 CREATE TABLE Favorite (
     Id INT IDENTITY(1,1) PRIMARY KEY,
-    UserId INT,
+    UserId varchar(50),
     VideoId INT,
     LikeDate DATE,
     FOREIGN KEY (UserId) REFERENCES Users(Id),
@@ -31,7 +32,7 @@ CREATE TABLE Favorite (
 
 CREATE TABLE Histoty (
 	Id INT IDENTITY(1,1) PRIMARY KEY,
-    UserId INT,
+    UserId varchar(50),
     VideoId INT,
     HDate DATE default CURRENT_TIMESTAMP,
     FOREIGN KEY (UserId) REFERENCES Users(Id),
@@ -41,7 +42,7 @@ CREATE TABLE Histoty (
 
 CREATE TABLE Share (
     Id INT IDENTITY(1,1) PRIMARY KEY,
-    UserId INT,
+    UserId varchar(50),
     VideoId INT,
     Emails NVARCHAR(MAX),
     ShareDate DATE,
@@ -50,3 +51,4 @@ CREATE TABLE Share (
 );
 
 
+select * from Users
