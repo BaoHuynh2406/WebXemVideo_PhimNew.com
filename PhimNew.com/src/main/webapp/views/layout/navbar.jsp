@@ -39,7 +39,7 @@
         data-bs-toggle="dropdown" aria-expanded="false">
         <img src="views/src/img/person-circle.svg" alt="mdo" width="32" height="32" class="rounded-circle">
         <span class="ms-1 fw-bold fs-7">
-			<%= session.getAttribute("username") %>
+			Tên đăng nhập
 		</span>
     </a>
     <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
