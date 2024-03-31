@@ -3,6 +3,7 @@ package Controller;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,7 +33,9 @@ public class loginControl extends HttpServlet {
 	    User user = userDao.findById(username);
 
 	    if (user != null && user.getPassword().equals(password)) {
-	        request.getSession().setAttribute("username", user.getId());
+	        Cookie usernameCookie = new Cookie("username", user.getId());        
+	        usernameCookie.setMaxAge(7 * 24 * 60 * 60); // 1 tuần
+	        response.addCookie(usernameCookie);
 	        request.getRequestDispatcher("/home").forward(request, response);
 	    } else {
 	        request.setAttribute("message", "Sai tên đăng nhập hoặc mật khẩu!");
