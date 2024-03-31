@@ -1,6 +1,7 @@
 package Controller;
 
 import DAO.videoDAO;
+import Entity.User;
 import Entity.Video_item;
 
 import javax.servlet.ServletException;
@@ -29,6 +30,10 @@ public class videoControl extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		
+		User u = Utils.Security.isLogin(req, resp);
+		if(u==null) return;
+		
 		String name = req.getParameter("id");
 		selectById(name, req);
 		req.getRequestDispatcher("/views/videoDetail.jsp").forward(req, resp);

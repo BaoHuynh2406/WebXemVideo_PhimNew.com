@@ -31,6 +31,8 @@
 </head>
 
 <body>
+	
+
 	<section class="container">
 		<div
 			class="d-flex flex-wrap align-items-center justify-content-between "
@@ -124,5 +126,17 @@
 		</div>
 	</section>
 </body>
-
+<script>
+        // Hàm để xóa cookie
+        function deleteCookie() {
+            document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/PhimNew;";
+			console.log('Xóa thành công!');
+        }
+        
+        // Gọi hàm xóa cookie khi trang được load
+        window.onload = function() {
+			console.log('Đang xóa..');
+            deleteCookie();
+        };
+    </script>
 </html>
