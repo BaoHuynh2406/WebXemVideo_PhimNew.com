@@ -10,9 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import DAO.userDAO;
 import Entity.User;
 
-/**
- * Servlet implementation class login
- */
 @WebServlet("/login")
 public class loginControl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -28,19 +25,19 @@ public class loginControl extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String username = request.getParameter("username");
-        String password = request.getParameter("password");
+	    String username = request.getParameter("username");
+	    String password = request.getParameter("password");
 
-        userDAO userDao = new userDAO();
-        User user = userDao.findById(username);
+	    userDAO userDao = new userDAO();
+	    User user = userDao.findById(username);
 
-        if (user != null && user.getPassword().equals(password)) {
-            // Đăng nhập thành công
-            request.getRequestDispatcher("/home").forward(request, response);
-        } else {
-            // Đăng nhập không thành công
-            request.setAttribute("message", "Sai tên đăng nhập hoặc mật khẩu!");
-            request.getRequestDispatcher("/views/login.jsp").forward(request, response);
-        }
+	    if (user != null && user.getPassword().equals(password)) {
+	        request.getSession().setAttribute("username", user.getId());
+	        request.getRequestDispatcher("/home").forward(request, response);
+	    } else {
+	        request.setAttribute("message", "Sai tên đăng nhập hoặc mật khẩu!");
+	        request.getRequestDispatcher("/views/login.jsp").forward(request, response);
+	    }
 	}
+
 }
