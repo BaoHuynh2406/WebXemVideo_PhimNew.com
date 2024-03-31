@@ -34,9 +34,9 @@ public class loginControl extends HttpServlet {
 
 	    if (user != null && user.getPassword().equals(password)) {
 	        Cookie usernameCookie = new Cookie("username", user.getId());        
-	        usernameCookie.setMaxAge(7 * 24 * 60 * 60); // 1 tuần
+	        usernameCookie.setMaxAge(7 * 24 * 60 * 60); 
 	        response.addCookie(usernameCookie);
-	        request.getRequestDispatcher("/home").forward(request, response);
+	        response.sendRedirect("/PhimNew/home");
 	    } else {
 	        request.setAttribute("message", "Sai tên đăng nhập hoặc mật khẩu!");
 	        request.getRequestDispatcher("/views/login.jsp").forward(request, response);
