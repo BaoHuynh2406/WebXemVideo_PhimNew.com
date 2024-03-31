@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fm" %>
-    
+   
 <section class="home-section" style="height: 600px;" >
     <div id="carouselExampleCaptions" class="carousel slide h-100">
         <div class="carousel-indicators">
@@ -57,7 +57,7 @@
             <li>Đã xem</li>
         </ul>
         <!-- Nội dung -->
-		<div class="row Block px-3 justify-content-between">
+		<div class="row Block  justify-content-between">
 				<c:forEach var="v" items="${LIST_VIDEO}">
 					<jsp:include page="/views/layout/item_video.jsp">
 						<jsp:param value="${v.title}" name="title" />
