@@ -38,7 +38,9 @@
     <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1"
         data-bs-toggle="dropdown" aria-expanded="false">
         <img src="views/src/img/person-circle.svg" alt="mdo" width="32" height="32" class="rounded-circle">
-        <span class="ms-1 fw-bold fs-7">Huỳnh Bảo</span>
+        <span class="ms-1 fw-bold fs-7">
+			<%= session.getAttribute("username") %>
+		</span>
     </a>
     <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
         <li><a class="dropdown-item" href="#">Cài đặt</a></li>

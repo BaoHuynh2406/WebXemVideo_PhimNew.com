@@ -15,8 +15,6 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.converters.DateConverter;
 
-
-
 import DAO.userDAO;
 import Entity.User;
 
@@ -32,7 +30,7 @@ public class QuanLyUser extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		String url = request.getRequestURL().toString();
 
 		request.setCharacterEncoding("utf-8");
@@ -139,7 +137,7 @@ public class QuanLyUser extends HttpServlet {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-			
+
 			request.setAttribute("error", "Error: " + e.getMessage());
 		}
 	}
