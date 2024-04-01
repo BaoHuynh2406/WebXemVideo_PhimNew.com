@@ -52,13 +52,14 @@
         <!-- Tiêu đề -->
         <h4 class="fw-bold mb-3" style="color: #1e54a4;">Dành cho bạn</h4>
         <ul class="tabs-control select">
-            <li class="selection">Trending</li>
+            <li class="selection">Made For you</li>
             <li>Yêu thích</li>
             <li>Đã xem</li>
         </ul>
         <!-- Nội dung -->
-		<div class="row Block  justify-content-between">
-				<c:forEach var="v" items="${LIST_VIDEO}">
+		<div class="py-4" style="box-shadow: 0 0 15px rgba(10, 10, 10, 0.2); border-radius: 20px; background-color: #f7f7f7;">
+      <div class="row m-0 Block justify-content-center">
+        <c:forEach var="v" items="${LIST_VIDEO}">
 					<jsp:include page="/views/layout/item_video.jsp">
 						<jsp:param value="${v.title}" name="title" />
 						<jsp:param value="${v.des}" name="des" />
@@ -66,8 +67,11 @@
 						<jsp:param value="${v.url}" name="url" />
 						<jsp:param value="${v.views}" name="views" />
 						<jsp:param value="${v.likes}" name="like" />
+						<jsp:param value="${active = true}" name="active" />
 					</jsp:include>
 				</c:forEach>
+      </div>
+				
 		</div>
 	</div>
 </section>

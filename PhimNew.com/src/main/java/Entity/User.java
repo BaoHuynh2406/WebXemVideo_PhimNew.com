@@ -1,10 +1,12 @@
 package Entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -34,13 +36,19 @@ public class User {
 	@Column(name = "Admin")
 	private boolean admin;
 	
+	@OneToMany(mappedBy = "user")
+	List<Favorite> favorite;
 
 	public User() {
 		super();
 	}
 
 
-	public User(String id, String password, String email, boolean gender, String fullName, Date date, boolean admin) {
+	
+
+
+	public User(String id, String password, String email, boolean gender, String fullName, Date date, boolean admin,
+			List<Favorite> favorite) {
 		super();
 		this.id = id;
 		this.password = password;
@@ -49,7 +57,27 @@ public class User {
 		this.fullName = fullName;
 		this.date = date;
 		this.admin = admin;
+		this.favorite = favorite;
 	}
+
+
+
+
+
+	public List<Favorite> getFavorite() {
+		return favorite;
+	}
+
+
+
+
+
+	public void setFavorite(List<Favorite> favorite) {
+		this.favorite = favorite;
+	}
+
+
+
 
 
 	public String getId() {

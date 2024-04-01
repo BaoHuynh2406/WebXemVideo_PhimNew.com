@@ -2,24 +2,36 @@ package Entity;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="Share")
 public class Share {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int Id;
 	
-	private String UserId;
+	@ManyToOne @JoinColumn(name = "UserId")
+	User user;
 	
-	private int VideoId;
+	@ManyToOne @JoinColumn(name = "VideoId")
+	Video video;
 	
+	@Column(name = "Emails")
 	private String Emails;
 	
-	private Date ShareDate;
+	@Temporal(TemporalType.DATE)
+	private Date ShareDate = new Date();
 
 	public int getId() {
 		return Id;
@@ -29,20 +41,20 @@ public class Share {
 		Id = id;
 	}
 
-	public String getUserId() {
-		return UserId;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserId(String userId) {
-		UserId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	public int getVideoId() {
-		return VideoId;
+	public Video getVideo() {
+		return video;
 	}
 
-	public void setVideoId(int videoId) {
-		VideoId = videoId;
+	public void setVideo(Video video) {
+		this.video = video;
 	}
 
 	public String getEmails() {
@@ -61,11 +73,11 @@ public class Share {
 		ShareDate = shareDate;
 	}
 
-	public Share(int id, String userId, int videoId, String emails, Date shareDate) {
+	public Share(int id, User user, Video video, String emails, Date shareDate) {
 		super();
 		Id = id;
-		UserId = userId;
-		VideoId = videoId;
+		this.user = user;
+		this.video = video;
 		Emails = emails;
 		ShareDate = shareDate;
 	}
@@ -73,6 +85,10 @@ public class Share {
 	public Share() {
 		super();
 	}
+	
+	
+
+
 	
 	
 }

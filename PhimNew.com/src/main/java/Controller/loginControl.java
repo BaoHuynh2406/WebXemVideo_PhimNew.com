@@ -7,6 +7,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import DAO.userDAO;
 import Entity.User;
@@ -33,9 +34,10 @@ public class loginControl extends HttpServlet {
 	    User user = userDao.findById(username);
 
 	    if (user != null && user.getPassword().equals(password)) {
-	        Cookie usernameCookie = new Cookie("username", user.getId());        
-	        usernameCookie.setMaxAge(7 * 24 * 60 * 60); 
-	        response.addCookie(usernameCookie);
+	    	 // Lưu thông tin người dùng vào session
+            HttpSession session = request.getSession();
+            session.setAttribute("user", user);
+            
 	        response.sendRedirect("/PhimNew/home");
 	    } else {
 	        request.setAttribute("message", "Sai tên đăng nhập hoặc mật khẩu!");
