@@ -15,7 +15,9 @@ import DAO.userDAO;
 import DAO.videoDAO;
 import Entity.User;
 
-@WebServlet({ "/home", "/home/logout" })
+@WebServlet({ 
+	"/home", 
+	"/home/logout" })
 public class HomePageControl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

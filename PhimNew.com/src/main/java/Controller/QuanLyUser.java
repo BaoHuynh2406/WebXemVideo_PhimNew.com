@@ -18,8 +18,14 @@ import org.apache.commons.beanutils.converters.DateConverter;
 import DAO.userDAO;
 import Entity.User;
 
-@WebServlet({ "/user/index", "/user/create", "/user/update", "/user/delete", "/user/reset", "/user/edit/*",
-		"/user/delete/*", })
+@WebServlet({ 
+	"/user/index",
+	"/user/create", 
+	"/user/update", 
+	"/user/delete", 
+	"/user/reset", 
+	"/user/edit/*",
+	"/user/delete/*", })
 public class QuanLyUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -27,7 +33,9 @@ public class QuanLyUser extends HttpServlet {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+	
+	
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -56,7 +64,7 @@ public class QuanLyUser extends HttpServlet {
 		}
 
 		findAll(request, response);
-		request.getRequestDispatcher("/views/user.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/login.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -87,6 +95,7 @@ public class QuanLyUser extends HttpServlet {
 			userDAO dao = new userDAO();
 			dao.create(user);
 			request.setAttribute("message", "Create success!");
+			response.sendRedirect(request.getContextPath() + "/login");
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

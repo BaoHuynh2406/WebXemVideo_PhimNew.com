@@ -43,10 +43,6 @@ public class User {
 		super();
 	}
 
-
-	
-
-
 	public User(String id, String password, String email, boolean gender, String fullName, Date date, boolean admin,
 			List<Favorite> favorite) {
 		super();
