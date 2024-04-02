@@ -34,6 +34,7 @@
         </a>
     </div>
 </section>
+<form name="frmdk" action="./login" method="post">
 <section style="background-color: #606b84; padding: 20px 0;">
     <div class="container  h-100">
         <div class="row d-flex align-items-center justify-content-center h-100">
@@ -48,8 +49,7 @@
                     <div class="form-outline mb-3">
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"> <i class="fas fa-user"></i></span>
-                            <input type="text" required ng-minlength="6"  name="userName"
-                                 placeholder="nguyenvannam123" class="form-control" />
+                            <input type="text" name="id" placeholder="nguyenvannam123" class="form-control" value="${user.id}" />
                         </div>
                         <label class="form-label" for="username">Tên đăng nhập <i style="color: red;">*</i></label>
                        
@@ -60,8 +60,7 @@
                     <div class="form-outline mb-3">
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-lock"></i></span>
-                            <input required ng-minlength="6" name="password" type="password"
-                                class="form-control " />
+                            <input name="repassword" type="password" class="form-control" value="${user.password}" />
                         </div>
                         <label class="form-label" for="password">Mật khẩu <i style="color: red;">*</i></label>
                         
@@ -82,8 +81,7 @@
                     <div class="form-outline mb-3">
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"> <i class="fas fa-envelope"></i></span>
-                            <input type="email" name="email" required placeholder="abc@123.com"
-                                class="form-control" />
+                            <input type="email" name="email" required placeholder="abc@123.com" class="form-control" value="${user.email}" />
                         </div>
                         <label class="form-label" for="email">Email:<i style="color: red;">*</i></label>
                       
@@ -94,8 +92,7 @@
                     <div class="form-outline mb-3">
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-id-badge"></i></span>
-                            <input type="text" name="fullName" required 
-                                placeholder="Nguyen Van A" class="form-control " />
+                            <input type="text" name="fullName" required placeholder="Nguyen Van A" class="form-control" value="${user.fullName}"/>
                         </div>
                         <label class="form-label" for="form1Example23">Tên của bạn: <i style="color: red;">*</i></label>
                        
@@ -107,15 +104,13 @@
                     <div class="mb-3">
                         <div class="form-check p-0">
                             <label class="form-check-label me-5" for="sex">Giới tính:</label>
-
-
-                            <input class="form-check-input" style="float: none;" checked="true" type="radio" name="gender"
-                                id="nam">
+							<input class="form-check-input" style="float: none;" checked="true" type="radio" name="gender" value="true" id="nam" ${user.gender?'checked':''}>
+                            
                             <label class="form-check-label me-5" for="nam">
                                 Nam
                             </label>
 
-                            <input class="form-check-input" style="float: none;" type="radio" name="gender" id="nu">
+                            <input class="form-check-input" style="float: none;" type="radio" name="gender" value="false" id="nu" ${!user.gender?'checked':''}>
                             <label class="form-check-label" for="nu">
                                 Nữ¯
                             </label>
@@ -127,7 +122,7 @@
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"> <i class="fas fa-birthday-cake"></i>
                             </span>
-                            <input type="date" required name="date" class="form-control " />
+                            <input type="date" required name="birthday" class="form-control" />
                         </div>
                         <label class="form-label" for="form1Example23">Ngày sinh:
                             <i style="color: red;">*</i>
@@ -136,7 +131,7 @@
                     </div>
 
                     <!-- Submit button -->
-                    <button type="submit"  class="btn btn-primary btn-lg btn-block w-100 mb-4">Đăng ký</button>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block w-100 mb-4">Đăng ký</button>
 
                     <span>Đã có tài khoản? <a href="./login">Đăng nhập ngay</a></span>
 
@@ -145,6 +140,7 @@
         </div>
     </div>
 </section>
+</form>
 </body>
 
 </html>

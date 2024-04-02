@@ -36,8 +36,8 @@ public class loginControl extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 
-		DAO_User dao = new DAO_User();
-		User user = dao.findByID(username);
+		DAO_User userDao = new DAO_User();
+		User user = userDao.findByID(username);
 
 		if (user != null && user.getPassword().equals(password)) {
 			// Lưu thông tin người dùng vào session
