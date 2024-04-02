@@ -80,7 +80,7 @@ public class DAO_User extends DAO<User,String>{
 	@Override
 	public User findByID(String userID) {
 		EntityManager em = JpaUtils.getEntityManager();
-		String jqpl = "Select o from User o where o.userID = :userID";//userID phải giống với parameter
+		String jqpl = "Select o from User o where o.id = :userID";//userID phải giống với parameter
 		TypedQuery<User> query = em.createQuery(jqpl, User.class);
 		query.setParameter("userID", userID);
 		return query.getSingleResult();
@@ -88,7 +88,7 @@ public class DAO_User extends DAO<User,String>{
 
 	public User checkLogin(String userID, String password) {
 		EntityManager em = JpaUtils.getEntityManager();
-		String jqpl = "Select o from User o where o.userID = :userID and o.password = :password";
+		String jqpl = "Select o from User o where o.id = :userID and o.password = :password";
 		TypedQuery<User> query = em.createQuery(jqpl,User.class);
 		query.setParameter("userID", userID);
 		query.setParameter("password", password);
@@ -106,7 +106,7 @@ public class DAO_User extends DAO<User,String>{
 	
 	public List<User> peopleLoveVideos(String vidID){
 		EntityManager em = JpaUtils.getEntityManager();
-		String jqpl = "Select f.user from Favorite f where f.video.videoID = :getVidID";
+		String jqpl = "Select f.user from Favorite f where f.video.id = :getVidID";
 		TypedQuery<User> query = em.createQuery(jqpl,User.class);
 		query.setParameter("getVidID", vidID);
 		return query.getResultList();
