@@ -20,11 +20,6 @@ public class userDAO {
 //	Them nhan vien moi
 	public User create(User entity) {
 		try {
-			// Chuyển đổi ngày tháng từ chuỗi sang kiểu Date
-            String dateString = dateFormat.format(entity.getDate());
-            Date date = dateFormat.parse(dateString);
-            entity.setDate(date);
-			
 			em.getTransaction().begin();
 
 			em.persist(entity);// them
