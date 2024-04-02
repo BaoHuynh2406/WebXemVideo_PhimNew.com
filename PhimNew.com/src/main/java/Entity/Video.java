@@ -7,12 +7,33 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
+
+
 @Entity
 @Table(name = "Video")
+@NamedQueries({
+	@NamedQuery(name="Video.findAll", 
+			query="SELECT v FROM Video v"),
+	@NamedQuery(name="Video.findByUser",
+	query="Select f.video from Favorite f where f.user.id = :getUserID"),
+	@NamedQuery(name="Video.findVideoByTitles",
+			query="Select DISTINCT f.video from Favorite f where f.video.title like :getVideoTitle"),
+	@NamedQuery(name="Video.favoriteVidsInRange",
+			query="Select DISTINCT f.video from Favorite f where f.likeDate between :getMinDate and :getMaxDate"),
+//	@NamedQuery(name="Video.findByMonths",
+//			query="Select DISTINCT f.video from Favorite f where month(f.likeDate) in ( :months )")
+})
+@NamedNativeQueries({
+	@NamedNativeQuery(name = "Report.random5", query = "Select top 5 * from Videos Order By newid()",resultClass = Video.class),
+})
 public class Video {
 
 	@Id@GeneratedValue(strategy = GenerationType.IDENTITY)

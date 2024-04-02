@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import DAO.DAO_Video;
 import DAO.userDAO;
 import DAO.videoDAO;
 import Entity.User;
@@ -39,14 +40,20 @@ public class HomePageControl extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8"); // Thiết lập chữ tiếng việt
 		HttpSession session = request.getSession(false);
-		User user = (User) session.getAttribute("user");
-		if (user == null) {
-			response.sendRedirect("/PhimNew/login");
-			return;
+		User user = null;
+		if(session != null) {
+			 user = (User) session.getAttribute("user");
+			if (user == null) {
+				response.sendRedirect("/PhimNew/login");
+				return;
+			}
 		}
+		
 		request.setAttribute("user", user);
-		videoDAO dao = new videoDAO();
-		request.setAttribute("LIST_VIDEO", dao.createData());
+		
+		
+		DAO_Video dao = new DAO_Video();
+		request.setAttribute("LIST_VIDEO", dao.findAll());
 		request.getRequestDispatcher("/views/index.jsp").forward(request, response);
 	}
 

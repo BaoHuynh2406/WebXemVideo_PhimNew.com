@@ -61,13 +61,14 @@
       <div class="row m-0 Block justify-content-center">
         <c:forEach var="v" items="${LIST_VIDEO}">
 					<jsp:include page="/views/layout/item_video.jsp">
+						<jsp:param value="${v.id}" name="id" />
 						<jsp:param value="${v.title}" name="title" />
 						<jsp:param value="${v.des}" name="des" />
-						<jsp:param value="${v.photo}" name="img" />
+						<jsp:param value="${v.poster}" name="img" />
 						<jsp:param value="${v.url}" name="url" />
 						<jsp:param value="${v.views}" name="views" />
-						<jsp:param value="${v.likes}" name="like" />
-						<jsp:param value="${active = true}" name="active" />
+						<jsp:param value="${like = 100}" name="like" />
+						<jsp:param value="${v.active}" name="active" />
 					</jsp:include>
 				</c:forEach>
       </div>
@@ -75,4 +76,34 @@
 		</div>
 	</div>
 </section>
-<!-- End Block Khóa học -->
+
+
+<!-- Block Trending -->
+<section class="home-section">
+
+  <div class="container">
+      <!-- Tiêu đề -->
+      <h4 class="fw-bold mb-3" style="color: #1e54a4;">Trending</h4>
+      <ul class="tabs-control select">
+          <li class="selection">Nhiều lượt xem</li>
+          <li>Hot trong tuần</li>
+      </ul>
+      <!-- Nội dung -->
+  <div class="py-4" style="box-shadow: 0 0 15px rgba(10, 10, 10, 0.2); border-radius: 20px; background-color: #f7f7f7;">
+    <div class="row m-0 Block justify-content-center">
+      <c:forEach var="v" items="${LIST_VIDEO}">
+        <jsp:include page="/views/layout/item_video.jsp">
+          <jsp:param value="${v.title}" name="title" />
+          <jsp:param value="${v.des}" name="des" />
+          <jsp:param value="${v.poster}" name="img" />
+          <jsp:param value="${v.url}" name="url" />
+          <jsp:param value="${v.views}" name="views" />
+          <jsp:param value="${like = 100}" name="like" />
+          <jsp:param value="${v.active}" name="active" />
+        </jsp:include>
+      </c:forEach>
+    </div>
+      
+  </div>
+</div>
+</section>
