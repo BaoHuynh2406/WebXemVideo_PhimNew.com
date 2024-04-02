@@ -49,6 +49,6 @@
         <li>
             <hr class="dropdown-divider">
         </li>
-        <li><a class="dropdown-item" href="./home/logout">Đăng xuất</a></li>
+        <li><a class="dropdown-item" href="./login">Đăng xuất</a></li>
     </ul>
 </div>

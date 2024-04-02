@@ -23,26 +23,32 @@ public class loginControl extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession session = request.getSession(false);
+		if (session != null) {
+			// Xóa thông tin người dùng khỏi session
+			session.removeAttribute("user");
+		}
 		request.getRequestDispatcher("/views/login.jsp").forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    String username = request.getParameter("username");
-	    String password = request.getParameter("password");
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
 
-	    userDAO userDao = new userDAO();
-	    User user = userDao.findById(username);
+		userDAO userDao = new userDAO();
+		User user = userDao.findById(username);
 
-	    if (user != null && user.getPassword().equals(password)) {
-	    	 // Lưu thông tin người dùng vào session
-            HttpSession session = request.getSession();
-            session.setAttribute("user", user);
-            
-	        response.sendRedirect("/PhimNew/home");
-	    } else {
-	        request.setAttribute("message", "Sai tên đăng nhập hoặc mật khẩu!");
-	        request.getRequestDispatcher("/views/login.jsp").forward(request, response);
-	    }
+		if (user != null && user.getPassword().equals(password)) {
+			// Lưu thông tin người dùng vào session
+			HttpSession session = request.getSession();
+			session.setAttribute("user", user);
+
+			response.sendRedirect("/PhimNew/home");
+		} else {
+			request.setAttribute("message", "Sai tên đăng nhập hoặc mật khẩu!");
+			request.getRequestDispatcher("/views/login.jsp").forward(request, response);
+		}
 	}
 
 }

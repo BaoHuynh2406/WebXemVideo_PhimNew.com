@@ -12,10 +12,9 @@ import javax.servlet.http.HttpSession;
 
 import DAO.DAO_Video;
 import DAO.userDAO;
-import DAO.videoDAO;
 import Entity.User;
 
-@WebServlet({ "/home", "/home/logout" })
+@WebServlet({ "/home" })
 public class HomePageControl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -28,17 +27,11 @@ public class HomePageControl extends HttpServlet {
 			throws ServletException, IOException {
 		String url = request.getRequestURL().toString();
 
-		if (url.contains("/home/logout")) {
-			HttpSession session = request.getSession(false);
-			if (session != null) {
-				// Xóa thông tin người dùng khỏi session
-				session.removeAttribute("user");
-			}
-			response.sendRedirect("/PhimNew/login");
-			return;
-		}
 
 		request.setCharacterEncoding("UTF-8"); // Thiết lập chữ tiếng việt
+		response.setCharacterEncoding("UTF-8"); // Thiết lập chữ tiếng việt
+		
+		
 		HttpSession session = request.getSession(false);
 		User user = null;
 		if(session != null) {
@@ -47,13 +40,12 @@ public class HomePageControl extends HttpServlet {
 				response.sendRedirect("/PhimNew/login");
 				return;
 			}
+		}else {
+			response.sendRedirect("/PhimNew/login");
+			return;
 		}
 		
 		request.setAttribute("user", user);
-		
-		
-		DAO_Video dao = new DAO_Video();
-		request.setAttribute("LIST_VIDEO", dao.findAll());
 		request.getRequestDispatcher("/views/index.jsp").forward(request, response);
 	}
 

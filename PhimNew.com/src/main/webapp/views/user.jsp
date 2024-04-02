@@ -103,7 +103,7 @@
 		</div>
 		<div class="input-group mb-3">
 			<span class="input-group-text" id="inputGroup-sizing-default">Birthday</span>
-			<input name="date" type="date" class="form-control" value="${user.date}"
+			<input name="date" type="date" class="form-control" value="${user.birthday}"
 				aria-label="Sizing example input"
 				aria-describedby="inputGroup-sizing-default">
 		</div>
@@ -148,7 +148,7 @@
 					<td>${user.email}</td>
 					<td>${user.gender?'Nam':'Nữ'}</td>
 					<td>${user.admin?'Admin':'User'}</td>
-					<td>${user.date}</td>
+					<td>${user.birthday}</td>
 					
 					<td><a href="/PhimNew/user/edit/?id=${user.id}">
 						edit

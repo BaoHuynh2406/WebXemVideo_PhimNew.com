@@ -1,8 +1,8 @@
 package Controller;
 
-import DAO.videoDAO;
+
 import Entity.User;
-import Entity.Video_item;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,8 +31,6 @@ public class videoControl extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		
-		User u = Utils.Security.isLogin(req, resp);
-		if(u==null) return;
 		
 		String name = req.getParameter("id");
 		selectById(name, req);
@@ -42,19 +40,19 @@ public class videoControl extends HttpServlet {
 	public void selectById(String name, HttpServletRequest request) throws ServletException, IOException {
 		{
 		
-			videoDAO dao = new videoDAO();
-			List<Video_item> items = dao.sellectAll();
-			Video_item select = null;
-			
-			for (Video_item item : items) {
-				if (item.getTitle().equalsIgnoreCase(name)) {
-					select = item;
-				}
-			}
+//			videoDAO dao = new videoDAO();
+//			List<Video_item> items = dao.sellectAll();
+//			Video_item select = null;
+//			
+//			for (Video_item item : items) {
+//				if (item.getTitle().equalsIgnoreCase(name)) {
+//					select = item;
+//				}
+//			}
 
-			System.out.println(select.getTitle());
-			// Lưu danh sách sản phẩm đã chọn vào request để chuyển tiếp tới trang JSP
-			request.setAttribute("select", select);
+//			System.out.println(select.getTitle());
+//			// Lưu danh sách sản phẩm đã chọn vào request để chuyển tiếp tới trang JSP
+//			request.setAttribute("select", select);
 		}
 
 	}

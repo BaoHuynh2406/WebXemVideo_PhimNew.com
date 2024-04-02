@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 
@@ -30,38 +32,14 @@ public class User {
 	@Column(name = "Fullname")
 	private String fullName;
 	
-	@Column(name = "Date")
-	private Date date;
+	@Temporal(TemporalType.DATE)
+	Date birthday = new Date();
 	
 	@Column(name = "Admin")
 	private boolean admin;
 	
 	@OneToMany(mappedBy = "user")
 	List<Favorite> favorite;
-
-	public User() {
-		super();
-	}
-
-
-	
-
-
-	public User(String id, String password, String email, boolean gender, String fullName, Date date, boolean admin,
-			List<Favorite> favorite) {
-		super();
-		this.id = id;
-		this.password = password;
-		this.email = email;
-		this.gender = gender;
-		this.fullName = fullName;
-		this.date = date;
-		this.admin = admin;
-		this.favorite = favorite;
-	}
-
-
-
 
 
 	public List<Favorite> getFavorite() {
@@ -130,15 +108,6 @@ public class User {
 	}
 
 
-	public Date getDate() {
-		return date;
-	}
-
-
-	public void setDate(Date date) {
-		this.date = date;
-	}
-
 
 	public boolean isAdmin() {
 		return admin;
@@ -147,6 +116,47 @@ public class User {
 
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
+	}
+
+
+
+
+
+	public Date getBirthday() {
+		return birthday;
+	}
+
+
+
+
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
+
+
+
+
+
+	public User(String id, String password, String email, boolean gender, String fullName, Date birthday, boolean admin,
+			List<Favorite> favorite) {
+		super();
+		this.id = id;
+		this.password = password;
+		this.email = email;
+		this.gender = gender;
+		this.fullName = fullName;
+		this.birthday = birthday;
+		this.admin = admin;
+		this.favorite = favorite;
+	}
+
+
+
+
+
+	public User() {
+		super();
 	}
 	
 	
