@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import DAO.userDAO;
+import DAO.DAO_User;
 import Entity.User;
 
 @WebServlet("/login")
@@ -36,8 +36,8 @@ public class loginControl extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 
-		userDAO userDao = new userDAO();
-		User user = userDao.findById(username);
+		DAO_User dao = new DAO_User();
+		User user = dao.findByID(username);
 
 		if (user != null && user.getPassword().equals(password)) {
 			// Lưu thông tin người dùng vào session

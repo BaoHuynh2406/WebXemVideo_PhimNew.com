@@ -15,7 +15,7 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.converters.DateConverter;
 
-import DAO.userDAO;
+import DAO.DAO_User;
 import Entity.User;
 
 @WebServlet({ "/user/index", "/user/create", "/user/update", "/user/delete", "/user/reset", "/user/edit/*",
@@ -38,9 +38,9 @@ public class QuanLyUser extends HttpServlet {
 		User user = null;
 
 		if (url.contains("delete")) {
-			userDAO dao = new userDAO();
+			DAO_User dao = new DAO_User();
 			if (request.getParameter("id") != null) {
-				dao.remove(request.getParameter("id"));
+				dao.delete(request.getParameter("id"));
 				request.setAttribute("message", "Delete success!");
 			}
 			// xóa rỗng các ô texbox
@@ -49,9 +49,9 @@ public class QuanLyUser extends HttpServlet {
 		}
 
 		else if (url.contains("edit")) {
-			userDAO dao = new userDAO();
+			DAO_User dao = new DAO_User();
 			if (request.getParameter("id") != null)
-				user = dao.findById(request.getParameter("id"));
+				user = dao.findByID(request.getParameter("id"));
 			request.setAttribute("user", user);
 		}
 
@@ -84,8 +84,8 @@ public class QuanLyUser extends HttpServlet {
 		try {
 			User user = new User();
 			BeanUtils.populate(user, request.getParameterMap());
-			userDAO dao = new userDAO();
-			dao.create(user);
+			DAO_User dao = new DAO_User();
+			dao.insert(user);
 			request.setAttribute("message", "Create success!");
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -100,7 +100,7 @@ public class QuanLyUser extends HttpServlet {
 		try {
 			User user = new User();
 			BeanUtils.populate(user, request.getParameterMap());
-			userDAO dao = new userDAO();
+			DAO_User dao = new DAO_User();
 			dao.update(user);
 			request.setAttribute("message", "Update success!");
 		} catch (Exception e) {
@@ -116,9 +116,9 @@ public class QuanLyUser extends HttpServlet {
 		try {
 			User user = new User();
 			BeanUtils.populate(user, request.getParameterMap());
-			userDAO dao = new userDAO();
+			DAO_User dao = new DAO_User();
 			if (user.getId() != null)
-				dao.remove(user.getId());
+				dao.delete(user.getId());
 			request.setAttribute("message", "Delete success!");
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -131,7 +131,7 @@ public class QuanLyUser extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		try {
-			userDAO dao = new userDAO();
+			DAO_User dao = new DAO_User();
 			List<User> list = dao.findAll();
 			request.setAttribute("users", list);
 		} catch (Exception e) {

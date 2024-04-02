@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import DAO.DAO_Video;
-import DAO.userDAO;
 import Entity.User;
 
 @WebServlet({ "/home" })

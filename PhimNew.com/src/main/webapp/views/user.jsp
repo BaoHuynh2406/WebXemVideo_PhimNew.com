@@ -12,59 +12,60 @@
 	rel="stylesheet"
 	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
 	crossorigin="anonymous">
-	<style>
-		body {
-			margin: 0;
-			padding: 0;
-			text-align: center;
-			background: #FFFBEB;
-		}
-		
-		h1 {
-			margin-top: 5%;
-			margin-bottom: 2%;
-			color: #251749;
-		}
-		
-		.div_form {
-			width: 40%;
-			margin-left: auto;
-			margin-right: auto;
-			color: #263159;
-		}
-		
-		.input-group-text, .input-group mb-3 {
-			color: #263159;
-		}
-		
-		.div_role {
-			display: flex;
-		}
-		
-		.div_role>input, .div_role>label {
-			margin-left: 0.3rem;
-		}
-		
-		.table {
-			width: 60%;
-			margin-left: auto;
-			margin-right: auto;
-		}
-		
-		.alert {
-			width: 60%;
-			margin-left: auto;
-			margin-right: auto;
-		}
-		a {
-			color: #263159;
-			margin-left: 0.2rem;
-		}
-		
-		.delete {
-			color: #DC3535;
-		}
-	</style>
+<style>
+body {
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	background: #FFFBEB;
+}
+
+h1 {
+	margin-top: 5%;
+	margin-bottom: 2%;
+	color: #251749;
+}
+
+.div_form {
+	width: 40%;
+	margin-left: auto;
+	margin-right: auto;
+	color: #263159;
+}
+
+.input-group-text, .input-group mb-3 {
+	color: #263159;
+}
+
+.div_role {
+	display: flex;
+}
+
+.div_role>input, .div_role>label {
+	margin-left: 0.3rem;
+}
+
+.table {
+	width: 60%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.alert {
+	width: 60%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+a {
+	color: #263159;
+	margin-left: 0.2rem;
+}
+
+.delete {
+	color: #DC3535;
+}
+</style>
 </head>
 <body>
 	<h1>User Manager</h1>
@@ -85,45 +86,58 @@
 		</div>
 		<div class="input-group mb-3">
 			<span class="input-group-text" id="inputGroup-sizing-default">Password</span>
-			<input name="password" type="password" class="form-control" value="${user.password}"
-				aria-label="Sizing example input"
+			<input name="password" type="password" class="form-control"
+				value="${user.password}" aria-label="Sizing example input"
 				aria-describedby="inputGroup-sizing-default">
 		</div>
 		<div class="input-group mb-3">
 			<span class="input-group-text" id="inputGroup-sizing-default">Fullname</span>
-			<input name="fullname" type="text" class="form-control" value="${user.fullName}"
-				aria-label="Sizing example input"
+			<input name="fullName" type="text" class="form-control"
+				value="${user.fullName}" aria-label="Sizing example input"
 				aria-describedby="inputGroup-sizing-default">
 		</div>
 		<div class="input-group mb-3">
 			<span class="input-group-text" id="inputGroup-sizing-default">Email</span>
-			<input name="email" type="email" class="form-control" value="${user.email}"
-				aria-label="Sizing example input"
+			<input name="email" type="email" class="form-control"
+				value="${user.email}" aria-label="Sizing example input"
 				aria-describedby="inputGroup-sizing-default">
 		</div>
 		<div class="input-group mb-3">
 			<span class="input-group-text" id="inputGroup-sizing-default">Birthday</span>
-			<input name="date" type="date" class="form-control" value="${user.birthday}"
-				aria-label="Sizing example input"
+			<input name="date" type="date" class="form-control"
+				value="<fmt:formatDate value='${user.birthday}' pattern='yyyy-MM-dd' />" aria-label="Sizing example input"
 				aria-describedby="inputGroup-sizing-default">
 		</div>
 		<div class="div_role mb-2">
-			<label>Role:</label>
-			<input id="admin" type="radio" name="admin" ${user.admin?'checked':''}
-				aria-label="Sizing example input"> <label for="admin">Admin</label>
-			<input id="user" type="radio" name="admin" ${user.admin?'':'checked'}
-				aria-label="Sizing example input"> <label for="user">User</label>
+			<input type="radio" class="btn-check" name="role" id="admin"
+				autocomplete="off" required value="true" ${user.admin?'checked':''}>
+			<label class="btn btn-sm btn-outline-secondary" for="admin">Admin</label>
+
+			<input type="radio" class="btn-check" name="role" id="user"
+				autocomplete="off" required value="false"
+				${!user.admin?'checked':''}> <label
+				class="btn btn-sm btn-outline-secondary" for="user">User</label>
 		</div>
+
 		<div class="div_role mb-3">
-			<label>Gender:</label>
-			<input id="admin" type="radio" name="gender" ${user.gender?'checked':''}
-				aria-label="Sizing example input"> <label for="admin">Nam</label>
-			<input id="user" type="radio" name="gender" ${user.gender?'':'checked'}
-				aria-label="Sizing example input"> <label for="user">Nữ</label>
+			<input type="radio" class="btn-check" name="gender" id="male"
+				autocomplete="off" required value="true" ${user.gender?'checked':''}>
+			<label class="btn btn-sm btn-outline-secondary" for="male">Nam</label>
+
+			<input type="radio" class="btn-check" name="gender" id="female"
+				autocomplete="off" required value="false"
+				${!user.gender?'checked':''}> <label
+				class="btn btn-sm btn-outline-secondary" for="female">Nữ</label>
 		</div>
-		<button formaction="/PhimNew/user/create" class="btn btn-outline-success">Create</button>
-		<button formaction="/PhimNew/user/update" class="btn btn-outline-warning">Update</button>
-		<button formaction="/PhimNew/user/delete" class="btn btn-outline-danger">Delete</button>
+
+
+
+		<button formaction="/PhimNew/user/create"
+			class="btn btn-outline-success">Create</button>
+		<button formaction="/PhimNew/user/update"
+			class="btn btn-outline-warning">Update</button>
+		<button formaction="/PhimNew/user/delete"
+			class="btn btn-outline-danger">Delete</button>
 		<button formaction="/PhimNew/user/reset" class="btn btn-outline-info">Reset</button>
 	</form>
 	<table class="table">
@@ -146,17 +160,13 @@
 					<td>${user.password}</td>
 					<td>${user.fullName}</td>
 					<td>${user.email}</td>
-					<td>${user.gender?'Nam':'Nữ'}</td>
+					<td>${user.gender ? 'Nam':'Nữ'}</td>
 					<td>${user.admin?'Admin':'User'}</td>
 					<td>${user.birthday}</td>
-					
-					<td><a href="/PhimNew/user/edit/?id=${user.id}">
-						edit
-						</a>
-						<a class="delete" href="/PhimNew/user/delete/?id=${user.id}">
-						delete
-						</a>
-					</td>
+
+					<td><a href="/PhimNew/user/edit/?id=${user.id}"> edit </a> <a
+						class="delete" href="/PhimNew/user/delete/?id=${user.id}">
+							delete </a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
