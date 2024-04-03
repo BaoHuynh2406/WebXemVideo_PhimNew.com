@@ -130,6 +130,16 @@ public class DAO_Video extends DAO<Video, String> {
 		TypedQuery<Video> query = em.createQuery(jqpl, Video.class);
 		return query.getResultList();
 	}
+	
+	public List<Video> findVideoActive(boolean isActive) {
+		EntityManager em = JpaUtils.getEntityManager();
+		String jqpl = "Select v from Video v where v.active =:isActive";
+		TypedQuery<Video> query = em.createQuery(jqpl, Video.class);
+		query.setParameter("isActive", isActive);
+		return query.getResultList();
+	}
+	
+	
 	// B�i 3
 	public List<Video> findByUser(String id){
 		EntityManager em = JpaUtils.getEntityManager();

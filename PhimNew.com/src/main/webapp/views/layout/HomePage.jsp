@@ -64,7 +64,7 @@
           <!-- Nội dung -->
           <div class="py-4"
             style="box-shadow: 0 0 15px rgba(10, 10, 10, 0.2); border-radius: 20px; background-color: #f7f7f7;">
-            <div class="row m-0 Block justify-content-center">
+            <div class="row m-0 Block justify-content-between">
 
               <!-- Item -->
               <a href="./video?id={{v.Id}}" class="col-sm-12 col-md-6 col-lg-4 mb-5" ng-repeat="v in videos" >
@@ -73,7 +73,7 @@
                   <div class="card-body">
                     <h5 class="card-title fs-5 mb-2">{{v.title}}</h5>
                     <div class="mb-1">
-                      <span class=" fs-7">{{v.views }}<i class="far fa-eye ms-1 me-3"></i>{{100}}<i
+                      <span class=" fs-7">{{v.views | number}}<i class="far fa-eye ms-1 me-3"></i>{{100 | number}}<i
                           style="color: red;" class="ms-1 bi bi-heart-fill"></i>
                       </span>
                     </div>
@@ -101,7 +101,7 @@
           <!-- Nội dung -->
           <div class="py-4"
             style="box-shadow: 0 0 15px rgba(10, 10, 10, 0.2); border-radius: 20px; background-color: #f7f7f7;">
-            <div class="row m-0 Block justify-content-center">
+            <div class="row m-0 Block justify-content-between">
 
 
               <!-- Item -->
@@ -111,7 +111,7 @@
                   <div class="card-body">
                     <h5 class="card-title fs-5 mb-2">{{v.title}}</h5>
                     <div class="mb-1">
-                      <span class=" fs-7">{{v.views }}<i class="far fa-eye ms-1 me-3"></i>{{100}}<i
+                      <span class=" fs-7">{{v.views | number}}<i class="far fa-eye ms-1 me-3"></i>{{100 | number}}<i
                           style="color: red;" class="ms-1 bi bi-heart-fill"></i>
                       </span>
                     </div>
