@@ -48,21 +48,30 @@ public class DangKyPage extends HttpServlet {
 	}
 	
 	protected boolean create(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		try {
-			User user = new User();
-			BeanUtils.populate(user, request.getParameterMap());
-			DAO_User dao = new DAO_User();
-			dao.insert(user);
-			request.setAttribute("message", "Create success!");
-			return true;
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			request.setAttribute("error", "Error: " + "User nam đã tồn tại");
-			return false;
-		}
+	        throws ServletException, IOException {
+	    // TODO Auto-generated method stub
+	    try {
+	        User user = new User();
+	        BeanUtils.populate(user, request.getParameterMap());
+	        DAO_User dao = new DAO_User();
+	        
+	        if (dao.findByID(user.getId()) != null) {
+	            request.setAttribute("error", "Error: User đã tồn tại");
+	            return false;
+	        } else {
+	            dao.insert(user);
+	            request.setAttribute("message", "Create success!");
+	            Thread.sleep(5000);
+	            response.sendRedirect("login.jsp");
+	            return true;
+	        }
+	    } catch (Exception e) {
+	        // TODO: handle exception
+	        e.printStackTrace();
+	        request.setAttribute("error", "Error: " + e.getMessage());
+	        return false;
+	    }
 	}
+
 
 }
