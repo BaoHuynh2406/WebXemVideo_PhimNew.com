@@ -6,14 +6,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
-import Entity.User;
+import Entity.Users;
 import Utils.JpaUtils;
 
 
-public class DAO_User extends DAO<User,String>{
+public class DAO_User extends DAO<Users,String>{
 
 	@Override
-	public void insert(User entity) {
+	public void insert(Users entity) {
 		EntityManager em = JpaUtils.getEntityManager();
 		EntityTransaction tran = em.getTransaction();
 		try {
@@ -31,7 +31,7 @@ public class DAO_User extends DAO<User,String>{
 	}
 
 	@Override
-	public void update(User entity) {
+	public void update(Users entity) {
 		EntityManager em = JpaUtils.getEntityManager();
 		EntityTransaction tran = em.getTransaction();
 		try {
@@ -55,7 +55,7 @@ public class DAO_User extends DAO<User,String>{
 		
 		try {
 			tran.begin();
-			User user = em.find(User.class,key);
+			Users user = em.find(Users.class,key);
 			if(user!=null) {
 				em.remove(user);
 			}else {
@@ -71,43 +71,52 @@ public class DAO_User extends DAO<User,String>{
 	}
 
 	@Override
-	public List<User> findAll() {
+	public List<Users> findAll() {
 		EntityManager em = JpaUtils.getEntityManager();
-		TypedQuery<User> query = em.createNamedQuery("User.findAll", User.class);
+		TypedQuery<Users> query = em.createNamedQuery("Users.findAll", Users.class);
 		return query.getResultList();
 	}
 
 	@Override
-	public User findByID(String userID) {
-		EntityManager em = JpaUtils.getEntityManager();
-		String jqpl = "Select o from User o where o.id = :userID";//userID phải giống với parameter
-		TypedQuery<User> query = em.createQuery(jqpl, User.class);
-		query.setParameter("userID", userID);
-		return query.getSingleResult();
+	public Users findByID(String userID) {
+		try {
+			EntityManager em = JpaUtils.getEntityManager();
+			String jqpl = "Select o from Users o where o.id = :userID";// userID phải giống với parameter
+			TypedQuery<Users> query = em.createQuery(jqpl, Users.class);
+			query.setParameter("userID", userID);
+			return query.getSingleResult();
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
-	public User checkLogin(String userID, String password) {
-		EntityManager em = JpaUtils.getEntityManager();
-		String jqpl = "Select o from User o where o.id = :userID and o.password = :password";
-		TypedQuery<User> query = em.createQuery(jqpl,User.class);
-		query.setParameter("userID", userID);
-		query.setParameter("password", password);
+	public Users checkLogin(String userID, String password) {
+		try {
+			EntityManager em = JpaUtils.getEntityManager();
+			String jqpl = "Select o from Users o where o.id = :userID and o.password = :password";
+			TypedQuery<Users> query = em.createQuery(jqpl,Users.class);
+			query.setParameter("userID", userID);
+			query.setParameter("password", password);
+			
+			return query.getSingleResult();
+		} catch (Exception e) {
+			return null;
+		}
 		
-		return query.getSingleResult();
 	}
 	
-	public List<User> findByName(String name){
+	public List<Users> findByName(String name){
 		EntityManager em = JpaUtils.getEntityManager();
-		String jqpl = "Select o from User o where o.fullName like :fullName";
-		TypedQuery<User> query = em.createQuery(jqpl, User.class);
+		String jqpl = "Select o from Users o where o.fullName like :fullName";
+		TypedQuery<Users> query = em.createQuery(jqpl, Users.class);
 		query.setParameter("fullName", "%"+name+"%");
 		return query.getResultList();
 	}
 	
-	public List<User> peopleLoveVideos(String vidID){
+	public List<Users> peopleLoveVideos(String vidID){
 		EntityManager em = JpaUtils.getEntityManager();
 		String jqpl = "Select f.user from Favorite f where f.video.id = :getVidID";
-		TypedQuery<User> query = em.createQuery(jqpl,User.class);
+		TypedQuery<Users> query = em.createQuery(jqpl,Users.class);
 		query.setParameter("getVidID", vidID);
 		return query.getResultList();
 	}

@@ -16,14 +16,14 @@ import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.converters.DateConverter;
 
 import DAO.DAO_User;
-import Entity.User;
+import Entity.Users;
 
 @WebServlet({ "/user/index", "/user/create", "/user/update", "/user/delete", "/user/reset", "/user/edit/*",
 		"/user/delete/*", })
-public class QuanLyUser extends HttpServlet {
+public class User_Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public QuanLyUser() {
+	public User_Controller() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -35,7 +35,7 @@ public class QuanLyUser extends HttpServlet {
 
 		request.setCharacterEncoding("utf-8");
 
-		User user = null;
+		Users user = null;
 
 		if (url.contains("delete")) {
 			DAO_User dao = new DAO_User();
@@ -44,7 +44,7 @@ public class QuanLyUser extends HttpServlet {
 				request.setAttribute("message", "Delete success!");
 			}
 			// xóa rỗng các ô texbox
-			user = new User();
+			user = new Users();
 			request.setAttribute("user", user);
 		}
 
@@ -64,7 +64,7 @@ public class QuanLyUser extends HttpServlet {
 		// TODO Auto-generated method stub
 		String url = request.getRequestURL().toString();
 		request.setCharacterEncoding("utf-8");
-		User user = new User();
+		Users user = new Users();
 		if (url.contains("create")) {
 			create(request, response);
 		} else if (url.contains("update")) {
@@ -72,7 +72,7 @@ public class QuanLyUser extends HttpServlet {
 		} else if (url.contains("delete")) {
 			delete(request, response);
 		} else if (url.contains("reset")) {
-			request.setAttribute("user", new User());
+			request.setAttribute("user", new Users());
 		}
 		findAll(request, response);
 		request.getRequestDispatcher("/views/user.jsp").forward(request, response);
@@ -82,7 +82,7 @@ public class QuanLyUser extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		try {
-			User user = new User();
+			Users user = new Users();
 			BeanUtils.populate(user, request.getParameterMap());
 			DAO_User dao = new DAO_User();
 			dao.insert(user);
@@ -98,7 +98,7 @@ public class QuanLyUser extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		try {
-			User user = new User();
+			Users user = new Users();
 			BeanUtils.populate(user, request.getParameterMap());
 			DAO_User dao = new DAO_User();
 			dao.update(user);
@@ -114,7 +114,7 @@ public class QuanLyUser extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		try {
-			User user = new User();
+			Users user = new Users();
 			BeanUtils.populate(user, request.getParameterMap());
 			DAO_User dao = new DAO_User();
 			if (user.getId() != null)
@@ -132,7 +132,7 @@ public class QuanLyUser extends HttpServlet {
 		// TODO Auto-generated method stub
 		try {
 			DAO_User dao = new DAO_User();
-			List<User> list = dao.findAll();
+			List<Users> list = dao.findAll();
 			request.setAttribute("users", list);
 		} catch (Exception e) {
 			// TODO: handle exception

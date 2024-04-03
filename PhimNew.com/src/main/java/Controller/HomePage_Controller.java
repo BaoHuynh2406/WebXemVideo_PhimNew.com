@@ -10,13 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import Entity.User;
+import Entity.Users;
 
 @WebServlet({ "/home" })
-public class HomePageControl extends HttpServlet {
+public class HomePage_Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public HomePageControl() {
+	public HomePage_Controller() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -31,9 +31,9 @@ public class HomePageControl extends HttpServlet {
 		
 		
 		HttpSession session = request.getSession(false);
-		User user = null;
+		Users user = null;
 		if(session != null) {
-			 user = (User) session.getAttribute("user");
+			 user = (Users) session.getAttribute("user");
 			if (user == null) {
 				response.sendRedirect("/PhimNew/login");
 				return;

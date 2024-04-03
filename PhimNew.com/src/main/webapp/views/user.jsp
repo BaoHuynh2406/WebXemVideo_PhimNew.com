@@ -105,8 +105,8 @@ a {
 		</div>
 		<div class="input-group mb-3">
 			<span class="input-group-text" id="inputGroup-sizing-default">Birthday</span>
-			<input name="birthday" type="date" class="form-control"
-				value="<fmt:formatDate value='${user.birthday}' pattern='yyyy-MM-dd' />" aria-label="Sizing example input"
+			<input name="" type="date" class="form-control"
+				value="" aria-label="Sizing example input"
 				aria-describedby="inputGroup-sizing-default">
 		</div>
 		<div class="div_role mb-2">

@@ -15,14 +15,14 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "History")
-public class Histoty {
+public class History {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int Id;
 	
 	@ManyToOne @JoinColumn(name = "UserId")
-	User user;
+	Users user;
 	
 	@ManyToOne @JoinColumn(name = "VideoId")
 	Video video;
@@ -30,7 +30,7 @@ public class Histoty {
 	@Temporal(TemporalType.DATE)
 	Date HDate = new Date();
 
-	public Histoty(int id, User user, Video video, Date hDate) {
+	public History(int id, Users user, Video video, Date hDate) {
 		super();
 		Id = id;
 		this.user = user;
@@ -38,7 +38,7 @@ public class Histoty {
 		HDate = hDate;
 	}
 
-	public Histoty() {
+	public History() {
 		super();
 	}
 
@@ -50,11 +50,11 @@ public class Histoty {
 		Id = id;
 	}
 
-	public User getUser() {
+	public Users getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(Users user) {
 		this.user = user;
 	}
 

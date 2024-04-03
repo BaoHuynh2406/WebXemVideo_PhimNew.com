@@ -59,6 +59,27 @@ public class Video {
 	
 	@OneToMany(mappedBy = "video")
 	List<Favorite> favorites;
+	
+	@OneToMany(mappedBy = "video")
+	List<History> Histories;
+
+	public Video(int id, String title, String poster, int views, String des, boolean active, String url,
+			List<Favorite> favorites, List<History> histories) {
+		super();
+		Id = id;
+		this.title = title;
+		this.poster = poster;
+		this.views = views;
+		this.des = des;
+		this.active = active;
+		this.url = url;
+		this.favorites = favorites;
+		Histories = histories;
+	}
+
+	public Video() {
+		super();
+	}
 
 	public int getId() {
 		return Id;
@@ -116,20 +137,6 @@ public class Video {
 		this.url = url;
 	}
 
-
-	public Video(int id, String title, String poster, int views, String des, boolean active, String url,
-			List<Favorite> favorites) {
-		super();
-		Id = id;
-		this.title = title;
-		this.poster = poster;
-		this.views = views;
-		this.des = des;
-		this.active = active;
-		this.url = url;
-		this.favorites = favorites;
-	}
-
 	public List<Favorite> getFavorites() {
 		return favorites;
 	}
@@ -138,9 +145,15 @@ public class Video {
 		this.favorites = favorites;
 	}
 
-	public Video() {
-		super();
+	public List<History> getHistories() {
+		return Histories;
 	}
+
+	public void setHistories(List<History> histories) {
+		Histories = histories;
+	}
+
+	
 	
 	
 	

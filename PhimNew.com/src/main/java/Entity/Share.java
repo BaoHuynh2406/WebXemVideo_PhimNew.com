@@ -22,7 +22,7 @@ public class Share {
 	private int Id;
 	
 	@ManyToOne @JoinColumn(name = "UserId")
-	User user;
+	Users user;
 	
 	@ManyToOne @JoinColumn(name = "VideoId")
 	Video video;
@@ -41,11 +41,11 @@ public class Share {
 		Id = id;
 	}
 
-	public User getUser() {
+	public Users getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(Users user) {
 		this.user = user;
 	}
 
@@ -73,7 +73,7 @@ public class Share {
 		ShareDate = shareDate;
 	}
 
-	public Share(int id, User user, Video video, String emails, Date shareDate) {
+	public Share(int id, Users user, Video video, String emails, Date shareDate) {
 		super();
 		Id = id;
 		this.user = user;

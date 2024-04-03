@@ -10,13 +10,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import DAO.DAO_User;
-import Entity.User;
+import Entity.Users;
 
 @WebServlet("/login")
-public class loginControl extends HttpServlet {
+public class Login_Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public loginControl() {
+	public Login_Controller() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -36,10 +36,9 @@ public class loginControl extends HttpServlet {
 		String password = request.getParameter("password");
 
 		DAO_User userDao = new DAO_User();
-		User user = userDao.findByID(username);
+		Users user = userDao.checkLogin(username, password);
 
-		if (user != null && user.getPassword().equals(password)) {
-			// Lưu thông tin người dùng vào session
+		if (user != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("user", user);
 

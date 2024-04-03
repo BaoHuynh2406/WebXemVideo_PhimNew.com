@@ -16,22 +16,22 @@ import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "Favorite", uniqueConstraints = {
-		@UniqueConstraint(columnNames = {"VideoId", "UserId"})
+		@UniqueConstraint(columnNames = {"id", "id"})
 })
 public class Favorite {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	 Long Id;
 	
-	@ManyToOne @JoinColumn(name = "UserId")
-	User user;
+	@ManyToOne @JoinColumn(name = "userId")
+	Users user;
 	
-	@ManyToOne @JoinColumn(name = "VideoId")
+	@ManyToOne @JoinColumn(name = "videoId")
 	Video video;
 	
 	@Temporal(TemporalType.DATE)
 	Date likeDate = new Date();
 
-	public Favorite(Long id, User user, Video video, Date likeDate) {
+	public Favorite(Long id, Users user, Video video, Date likeDate) {
 		super();
 		Id = id;
 		this.user = user;
@@ -51,11 +51,11 @@ public class Favorite {
 		Id = id;
 	}
 
-	public User getUser() {
+	public Users getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(Users user) {
 		this.user = user;
 	}
 

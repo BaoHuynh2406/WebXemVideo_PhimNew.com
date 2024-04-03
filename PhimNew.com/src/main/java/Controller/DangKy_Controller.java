@@ -18,17 +18,17 @@ import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.converters.DateConverter;
 
 import DAO.DAO_User;
-import Entity.User;
+import Entity.Users;
 
 
 
 
 @WebServlet("/SignUp")
-public class DangKyPage extends HttpServlet {
+public class DangKy_Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     
-    public DangKyPage() {
+    public DangKy_Controller() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,8 +42,17 @@ public class DangKyPage extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		User user = new User();
-		create(request, response);
+		Users user = new Users();
+		
+		if(create(request, response)) {
+			try {
+				Thread.sleep(5000);
+				response.sendRedirect("/PhimNew/login");
+				return;
+			} catch (InterruptedException e) {
+				request.setAttribute("error", e.getMessage());
+			}
+		}
 		request.getRequestDispatcher("views/SignUp.jsp").forward(request, response);
 	}
 	
@@ -51,7 +60,7 @@ public class DangKyPage extends HttpServlet {
 	        throws ServletException, IOException {
 	    // TODO Auto-generated method stub
 	    try {
-	        User user = new User();
+	        Users user = new Users();
 	        BeanUtils.populate(user, request.getParameterMap());
 	        DAO_User dao = new DAO_User();
 	        
@@ -61,12 +70,9 @@ public class DangKyPage extends HttpServlet {
 	        } else {
 	            dao.insert(user);
 	            request.setAttribute("message", "Create success!");
-	            Thread.sleep(5000);
-	            response.sendRedirect("/PhimNew/login");
 	            return true;
 	        }
 	    } catch (Exception e) {
-	        // TODO: handle exception
 	        e.printStackTrace();
 	        request.setAttribute("error", "Error: " + e.getMessage());
 	        return false;
