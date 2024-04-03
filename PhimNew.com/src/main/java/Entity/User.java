@@ -157,6 +157,23 @@ public class User {
 
 
 
+	public User(String id, String password, String email, boolean gender, String fullName, Date birthday,
+			List<Favorite> favorite) {
+		super();
+		this.id = id;
+		this.password = password;
+		this.email = email;
+		this.gender = gender;
+		this.fullName = fullName;
+		this.birthday = birthday;
+		this.favorite = favorite;
+		this.admin = false;
+	}
+
+
+
+
+
 	public User() {
 		super();
 	}

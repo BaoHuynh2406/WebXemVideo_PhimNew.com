@@ -25,7 +25,6 @@ public class loginControl extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		if (session != null) {
-			// Xóa thông tin người dùng khỏi session
 			session.removeAttribute("user");
 		}
 		request.getRequestDispatcher("/views/login.jsp").forward(request, response);

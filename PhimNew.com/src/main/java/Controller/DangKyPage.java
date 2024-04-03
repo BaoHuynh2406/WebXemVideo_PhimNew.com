@@ -35,35 +35,34 @@ public class DangKyPage extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
 		request.getRequestDispatcher("views/SignUp.jsp").forward(request, response);
 	}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-	    String id = request.getParameter("id");
-	    String password = request.getParameter("password");
-	    String email = request.getParameter("email");
-	    boolean gender = Boolean.parseBoolean(request.getParameter("gender"));
-	    String fullName = request.getParameter("fullName");
-	    Date birthday = null; 
-	    try {
-	        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-	        birthday = sdf.parse(request.getParameter("birthday"));
-	    } catch (ParseException e) {
-	        e.printStackTrace();
-	    }
-	    boolean admin = Boolean.parseBoolean(request.getParameter("admin"));
-	    
-	    DAO_User dao = new DAO_User();
-	    User user = dao.findByID(id);
-	    if (user == null) {
-	        User newUser = new User(id, password, email, gender, fullName, birthday, admin, null);
-	        dao.insert(newUser);
-	    } else {
-	        System.out.println("Error: " + user);
-	    }
-	    response.sendRedirect("SignUp.jsp");
+		request.setCharacterEncoding("utf-8");
+		User user = new User();
+		create(request, response);
+		request.getRequestDispatcher("views/SignUp.jsp").forward(request, response);
+	}
+	
+	protected boolean create(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		try {
+			User user = new User();
+			BeanUtils.populate(user, request.getParameterMap());
+			DAO_User dao = new DAO_User();
+			dao.insert(user);
+			request.setAttribute("message", "Create success!");
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			request.setAttribute("error", "Error: " + e.getMessage());
+			return false;
+		}
 	}
 
 }

@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -104,7 +105,7 @@ a {
 		</div>
 		<div class="input-group mb-3">
 			<span class="input-group-text" id="inputGroup-sizing-default">Birthday</span>
-			<input name="date" type="date" class="form-control"
+			<input name="birthday" type="date" class="form-control"
 				value="<fmt:formatDate value='${user.birthday}' pattern='yyyy-MM-dd' />" aria-label="Sizing example input"
 				aria-describedby="inputGroup-sizing-default">
 		</div>
