@@ -62,7 +62,7 @@ public class DangKyPage extends HttpServlet {
 	            dao.insert(user);
 	            request.setAttribute("message", "Create success!");
 	            Thread.sleep(5000);
-	            response.sendRedirect("login.jsp");
+	            response.sendRedirect("/PhimNew/login");
 	            return true;
 	        }
 	    } catch (Exception e) {
