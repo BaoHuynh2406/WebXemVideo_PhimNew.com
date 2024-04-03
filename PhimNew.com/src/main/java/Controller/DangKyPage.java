@@ -60,7 +60,7 @@ public class DangKyPage extends HttpServlet {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-			request.setAttribute("error", "Error: " + e.getMessage());
+			request.setAttribute("error", "Error: " + "User nam đã tồn tại");
 			return false;
 		}
 	}

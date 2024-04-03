@@ -131,7 +131,7 @@
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"> <i class="fas fa-birthday-cake"></i>
                             </span>
-                            <input type="date" required name="birthday" value="<fmt:formatDate value='${user.birthday}' pattern='yyyy-MM-dd' />" class="form-control"  />
+                            <input type="date" required name="date" value="<fmt:formatDate value='${user.birthday}' pattern='yyyy-MM-dd' />" class="form-control"  />
                         </div>
                         <label class="form-label" for="form1Example23">Ngày sinh:
                             <i style="color: red;">*</i>
