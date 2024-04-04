@@ -16,7 +16,7 @@ import Entity.Video;
 import Utils.JpaUtils;
 
 
-public class DAO_Video extends DAO<Video, String> {
+public class DAO_Video extends DAO<Video, Integer> {
 
 	@Override
 	public void insert(Video entity) {
@@ -57,7 +57,7 @@ public class DAO_Video extends DAO<Video, String> {
 	}
 
 	@Override
-	public void delete(String key) {
+	public void delete(Integer key) {
 		EntityManager em = JpaUtils.getEntityManager();
 		EntityTransaction tran = em.getTransaction();
 
@@ -89,9 +89,9 @@ public class DAO_Video extends DAO<Video, String> {
 	}
 
 	@Override
-	public Video findByID(String key) {
+	public Video findByID(Integer key) {
 		EntityManager em = JpaUtils.getEntityManager();
-		String jqpl = "Select v from Video v where v.videoID = :getVidID";//parameter not String key
+		String jqpl = "Select v from Video v where v.Id = :getVidID";//parameter not String key
 		TypedQuery<Video> query = em.createQuery(jqpl,Video.class);
 		query.setParameter("getVidID", key);
 		return query.getSingleResult();

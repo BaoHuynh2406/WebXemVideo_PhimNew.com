@@ -67,7 +67,7 @@
             <div class="row m-0 Block justify-content-between">
 
               <!-- Item -->
-              <a href="./video?id={{v.Id}}" class="col-sm-12 col-md-6 col-lg-4 mb-5" ng-repeat="v in videos" >
+              <a href="/PhimNew/home/video?id={{v.Id}}" class="col-sm-12 col-md-6 col-lg-4 mb-5" ng-repeat="v in videos" >
                 <div class="card card-custom l-bg-cherry px-0">
                   <img src="views/src/img/{{v.poster}}" class="card-img-top" alt="..." style="height: 100%;">
                   <div class="card-body">
