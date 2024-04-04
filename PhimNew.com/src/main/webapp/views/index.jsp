@@ -34,7 +34,7 @@
 
             </head>
 
-            <body ng-app="PhimNew">
+            <body ng-app="PhimNew" ng-controler="main_controller">
                 <!-- Header -->
                 <header class="header p-3 mb-1 border-bottom " id="header">
                     <%@include file="layout/header.jsp" %>
@@ -61,7 +61,9 @@
             <script>
                 var app = angular.module('PhimNew', []);
 
-
+                app.controller('main_controller', function($scope, $http){
+                    
+                });
 
                 app.controller('Block_video', function ($scope, $http) {
 
