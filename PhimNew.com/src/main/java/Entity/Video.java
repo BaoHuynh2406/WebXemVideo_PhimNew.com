@@ -1,5 +1,6 @@
 package Entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -13,6 +14,9 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 
@@ -34,7 +38,7 @@ import javax.persistence.Table;
 @NamedNativeQueries({
 	@NamedNativeQuery(name = "Report.random5", query = "Select top 5 * from Videos Order By newid()",resultClass = Video.class),
 })
-public class Video {
+public class Video implements Serializable {
 
 	@Id@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int Id;
@@ -57,10 +61,14 @@ public class Video {
 	@Column(name = "url")
 	private String url;
 	
+
 	@OneToMany(mappedBy = "video")
+	@JsonIgnoreProperties
 	List<Favorite> favorites;
-	
+	 
+	 
 	@OneToMany(mappedBy = "video")
+	@JsonIgnoreProperties
 	List<History> Histories;
 
 	public Video(int id, String title, String poster, int views, String des, boolean active, String url,

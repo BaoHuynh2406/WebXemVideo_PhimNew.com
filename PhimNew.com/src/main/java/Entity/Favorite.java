@@ -1,5 +1,6 @@
 package Entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -13,19 +14,23 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name = "Favorite", uniqueConstraints = {
 		@UniqueConstraint(columnNames = {"id", "id"})
 })
-public class Favorite {
+public class Favorite implements Serializable {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	 Long Id;
 	
 	@ManyToOne @JoinColumn(name = "userId")
+	@JsonIgnore
 	Users user;
 	
 	@ManyToOne @JoinColumn(name = "videoId")
+	@JsonIgnore
 	Video video;
 	
 	@Temporal(TemporalType.DATE)
