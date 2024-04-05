@@ -5,7 +5,7 @@
 
 <c:if test="${param.active eq true}">
     <!-- Item -->
-    <a href="./video?id=${param.id}" class="col-sm-12 col-md-6 col-lg-4 mb-5">
+    <a ng-click="watchVideo(${param.id})" class="col-sm-12 col-md-6 col-lg-4 mb-5">
         <div class="card card-custom l-bg-cherry px-0">
             <img src="views/src/img/${param.img}" class="card-img-top" alt="..." style="height: 100%;">
             <div class="card-body" >

@@ -37,7 +37,7 @@ public class Video_controller extends HttpServlet {
 		}
 		
 		
-		request.getRequestDispatcher("/views/layout/Video.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/watch.jsp").forward(request, response);
 	}
 
 	

@@ -34,7 +34,7 @@
 
             </head>
 
-            <body ng-app="PhimNew" ng-controler="main_controller">
+            <body ng-app="PhimNew" ng-controller="main_controller">
                 <!-- Header -->
                 <header class="header p-3 mb-1 border-bottom " id="header">
                     <%@include file="layout/header.jsp" %>
@@ -53,7 +53,7 @@
                     <%@include file="layout/footer.jsp" %>
 
                 </footer>
-               
+
                 <!-- Footer -->
 
 
@@ -64,18 +64,33 @@
 
                 app.config(function ($routeProvider) {
                     $routeProvider
-                        .when("/homepage", {
-                            templateUrl: "views/layout/HomePage.jsp",
-                            controller : "Block_video"
+                        .when("/timkiem", {
+                            templateUrl: "views/layout/Trangtimkiem.jsp",
+                            controller: "Block_video"
+                        })
+                        .when("/watch",{
+                            templateUrl: "views/layout/watch.html",
+                            controller: "Block_video"
                         })
                         .otherwise({
                             templateUrl: "views/layout/HomePage.html",
-                            controller : "Block_video"
+                            controller: "Block_video"
                         });
                 });
 
                 app.controller('main_controller', function ($scope, $http) {
+                    $scope.timkiem = function () {
+                        window.location.href = "#!/timkiem";
 
+                        $http.get('/PhimNew/timkiem', { params: { nd: $scope.nd } })
+                            .then(function (response) {
+                                $scope.videos = response.data;
+                            })
+                            .catch(function (error) {
+
+                                console.error('Error loading items:', error);
+                            });
+                    };
                 });
 
                 app.controller('Block_video', function ($scope, $http) {
@@ -116,6 +131,8 @@
                                 console.error('Error loading items:', error);
                             });
                     };
+
+                   
                 });
 
 

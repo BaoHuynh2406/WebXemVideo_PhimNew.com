@@ -24,8 +24,8 @@
     <!-- SEARCH -->
     <form class="d-flex align-items-center justify-content-center" >
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="Tìm kiếm...">
-            <div class="input-group-append"><button class="btn btn-primary"><i
+            <input ng-model="nd" type="text" class="form-control" placeholder="Tìm kiếm...">
+            <div class="input-group-append"><button ng-click="timkiem()" class="btn btn-primary"><i
                         class="bi bi-search"></i></button></div>
         </div>
     </form>
