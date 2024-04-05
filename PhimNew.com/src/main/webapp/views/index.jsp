@@ -40,8 +40,9 @@
                     <%@include file="layout/header.jsp" %>
                 </header>
 
-                <main ng-controller="Block_video">
-                    <%@include file="layout/HomePage.jsp" %>
+                <main>
+                    <div ng-view></div>
+
                 </main>
 
 
@@ -52,17 +53,29 @@
                     <%@include file="layout/footer.jsp" %>
 
                 </footer>
+               
                 <!-- Footer -->
 
 
             </body>
 
-            <script src="views/src/Js/index.js"></script>
             <script>
-                var app = angular.module('PhimNew', []);
+                var app = angular.module('PhimNew', ["ngRoute"]);
 
-                app.controller('main_controller', function($scope, $http){
-                    
+                app.config(function ($routeProvider) {
+                    $routeProvider
+                        .when("/homepage", {
+                            templateUrl: "views/layout/HomePage.jsp",
+                            controller : "Block_video"
+                        })
+                        .otherwise({
+                            templateUrl: "views/layout/HomePage.html",
+                            controller : "Block_video"
+                        });
+                });
+
+                app.controller('main_controller', function ($scope, $http) {
+
                 });
 
                 app.controller('Block_video', function ($scope, $http) {
