@@ -14,6 +14,7 @@ import org.hibernate.query.Query;
 
 import Entity.History;
 import Entity.Users;
+import Entity.Vd;
 import Entity.Video;
 import Utils.JpaUtils;
 
@@ -215,6 +216,18 @@ public class DAO_Video extends DAO<Video, Integer> {
 	    } finally {
 	        em.close();
 	    }
+	}
+	
+	public List<Vd> getOnly(List<Video> list){
+		List<Vd> listReturn = new ArrayList();
+		for(Video v : list) {
+			listReturn.add(new Vd(
+					v.getId(), v.getTitle(), v.getPoster(), v.getViews(), v.getDes(),
+					v.isActive(), v.getUrl()
+					));
+		}
+		
+		return listReturn;
 	}
 
 
