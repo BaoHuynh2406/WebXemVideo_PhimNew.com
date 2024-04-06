@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
+import DAO.DAO_History;
 import DAO.DAO_Video;
 import Entity.Users;
 import Entity.Vd;
@@ -44,6 +45,7 @@ public class VideoServlet extends HttpServlet {
 		String tab = request.getParameter("tab");
 		
 		DAO_Video dao = new DAO_Video();
+		DAO_History daoH = new DAO_History();
 		// Tạo danh sách các video tương ứng với tab
 		List<Vd> videos = new ArrayList();
 		try {
@@ -54,7 +56,7 @@ public class VideoServlet extends HttpServlet {
 				videos = dao.getOnly(dao.findFavoriteVidsByUserID(user.getId()));
 				System.out.println(tab);
 			} else if ("da_xem".equals(tab)) {
-				
+				videos = dao.getOnly(daoH.findVDHistoryByUserID(user.getId()));
 				System.out.println(tab);
 			}
 			
