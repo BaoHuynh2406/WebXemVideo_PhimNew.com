@@ -11,10 +11,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
 import DAO.DAO_Video;
+import Entity.Users;
 import Entity.Vd;
 import Entity.Video;
 
@@ -36,7 +38,8 @@ public class VideoServlet extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8"); // Thiết lập chữ tiếng việt
 		response.setCharacterEncoding("UTF-8"); // Thiết lập chữ tiếng việt
-		
+		HttpSession session = request.getSession();
+		Users user = (Users) session.getAttribute("user");
 		// Lấy giá trị của tham số tab từ yêu cầu
 		String tab = request.getParameter("tab");
 		
@@ -48,9 +51,10 @@ public class VideoServlet extends HttpServlet {
 				videos = dao.getOnly(dao.findVideoActive(true));
 				System.out.println(tab);
 			} else if ("yeu_thich".equals(tab)) {
-				videos = dao.getOnly(dao.findVideoActive(false));
+				videos = dao.getOnly(dao.findFavoriteVidsByUserID(user.getId()));
 				System.out.println(tab);
 			} else if ("da_xem".equals(tab)) {
+				
 				System.out.println(tab);
 			}
 			

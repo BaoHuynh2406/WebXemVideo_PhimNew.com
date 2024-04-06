@@ -90,16 +90,19 @@ public class DAO_History extends DAO<History, Integer> {
         }
         return history;
     }
- // Phương thức thêm vào bảng History
-    private void addHistory(History entity) {
-        // tìm id
-        Integer videoID = entity.getVideo().getId();
+    
+    
 
-        // thêm vào bảng History
-        DAO_History daoHistory = new DAO_History();
-        History history = new History();
-        history.setUser(entity.getUser());
-        history.setVideo(entity.getVideo());
-        daoHistory.insert(history);
+    public List<History> findVDHistoryByUserID() {
+        EntityManager entityManager = JpaUtils.getEntityManager();
+        List<History> histories = null;
+        try {
+            histories = entityManager.createQuery("SELECT h FROM History h", History.class).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            entityManager.close();
+        }
+        return histories;
     }
 }
