@@ -150,7 +150,7 @@
 							<div class="input-group">
 								<span class="input-group-text" id="basic-addon1"> <i
 									class="fas fa-birthday-cake"></i>
-								</span> <input type="date" required name="" value=""
+								</span> <input type="date" required name="date" value=""
 									class="form-control" />
 							</div>
 							<label class="form-label" for="form1Example23">Ngày sinh:
@@ -160,7 +160,7 @@
 						</div>
 
 						<!-- Submit button -->
-						<button type="submit"
+						<button type="submit" name="dangky"
 							class="btn btn-primary btn-lg btn-block w-100 mb-4">Đăng
 							ký</button>
 

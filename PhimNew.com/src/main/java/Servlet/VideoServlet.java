@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import DAO.DAO_Video;
+import Entity.Vd;
 import Entity.Video;
 
 @WebServlet("/VideoLoad")
@@ -52,10 +53,18 @@ public class VideoServlet extends HttpServlet {
 			} else if ("da_xem".equals(tab)) {
 				System.out.println(tab);
 			}
+			
+			List<Vd> videoss = new ArrayList();
+			for(Video v : videos) {
+				videoss.add(new Vd(
+						v.getId(), v.getTitle(), v.getPoster(), v.getViews(), v.getDes(),
+						v.isActive(), v.getUrl()
+						));
+			}
 			// Chuyển danh sách video thành JSON và gửi về client
 			response.setContentType("application/json");
 			PrintWriter out = response.getWriter();
-			out.println(new Gson().toJson(videos));
+			out.println(new Gson().toJson(videoss));
 
 		} catch (Exception e) {
 			// TODO: handle exception
