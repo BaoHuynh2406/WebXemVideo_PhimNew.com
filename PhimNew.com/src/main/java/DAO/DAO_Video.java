@@ -12,6 +12,9 @@ import javax.persistence.TypedQuery;
 
 import org.hibernate.query.Query;
 
+import Entity.History;
+import Entity.Users;
+import Entity.Vd;
 import Entity.Video;
 import Utils.JpaUtils;
 
@@ -171,13 +174,63 @@ public class DAO_Video extends DAO<Video, Integer> {
 		query.setParameter("months", listMonth);
 		return query.getResultList();
 	}
-	//B�i 4
+	//Bai 4
 	@SuppressWarnings("unchecked")
 	public List<Video> rand5Vids(){
 		EntityManager em = JpaUtils.getEntityManager();
 		javax.persistence.Query query = em.createNamedQuery("Report.random5");
 		return query.getResultList();
 	}
+	public void increaseViewCount(Integer videoId, Users user) {
+	    EntityManager em = JpaUtils.getEntityManager();
+	    EntityTransaction tran = em.getTransaction();
+
+	    try {
+	        tran.begin();
+	        Video video = em.find(Video.class, videoId);
+	        if (video != null) {
+	            int currentViews = video.getViews();
+	            video.setViews(currentViews + 1);
+	            em.merge(video);
+	            tran.commit();
+	            
+	            // Gọi trực tiếp phương thức thêm vào lịch sử
+	            // tìm id
+	            Integer videoID = video.getId();
+
+	            // thêm vào bảng History
+	            DAO_History daoHistory = new DAO_History();
+	            History history = new History();
+	            history.setUser(user);
+	            history.setVideo(video);
+	            daoHistory.insert(history);
+
+	        } else {
+	            throw new Exception("Video not found!");
+	        }
+	    } catch (Exception e) {
+	        if (tran != null && tran.isActive()) {
+	            tran.rollback();
+	        }
+	        e.printStackTrace();
+	    } finally {
+	        em.close();
+	    }
+	}
+	
+	public List<Vd> getOnly(List<Video> list){
+		List<Vd> listReturn = new ArrayList();
+		for(Video v : list) {
+			listReturn.add(new Vd(
+					v.getId(), v.getTitle(), v.getPoster(), v.getViews(), v.getDes(),
+					v.isActive(), v.getUrl()
+					));
+		}
+		
+		return listReturn;
+	}
+
+
 
 //	@SuppressWarnings("unchecked")
 //	public List<TemporaryClass> reportFavoriteByYear(Integer year){

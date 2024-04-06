@@ -1,5 +1,6 @@
 package Entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -12,12 +13,14 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 @Entity
 @Table(name="Users")
 @NamedQuery(name="Users.findAll", query="SELECT u FROM Users u")
-public class Users {
+public class Users implements Serializable {
 	@Id
 	@Column(name = "Id")
 	private String id;
@@ -41,9 +44,11 @@ public class Users {
 	private boolean admin;
 	
 	@OneToMany(mappedBy = "user")
+	@JsonIgnore
 	List<Favorite> favorite;
 
 	@OneToMany(mappedBy = "user")
+	@JsonIgnore
 	List<History> Histories;
 
 	public List<Favorite> getFavorite() {

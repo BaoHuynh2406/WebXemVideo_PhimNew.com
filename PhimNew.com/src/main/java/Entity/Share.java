@@ -1,5 +1,6 @@
 package Entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -13,18 +14,22 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="Share")
-public class Share {
+public class Share implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int Id;
 	
 	@ManyToOne @JoinColumn(name = "UserId")
+	@JsonIgnore
 	Users user;
 	
 	@ManyToOne @JoinColumn(name = "VideoId")
+	@JsonIgnore
 	Video video;
 	
 	@Column(name = "Emails")
