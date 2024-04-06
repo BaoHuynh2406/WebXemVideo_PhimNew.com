@@ -6,6 +6,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import DAO.DAO_Favorite;
 import DAO.DAO_Video;
 import Entity.Users;
 import Entity.Video;
@@ -13,7 +16,7 @@ import Entity.Video;
 @WebServlet("/home/video")
 public class Video_controller extends HttpServlet {
     private static final long serialVersionUID = 1L;
-
+    
     public Video_controller() {
         super();
     }
@@ -35,6 +38,7 @@ public class Video_controller extends HttpServlet {
                     // Lấy video mới nhất sau khi đã tăng số lượt xem
                     video = dao_video.findByID(videoId);
                     
+                    
                     request.setAttribute("v", video);
                 } else {
                     throw new ServletException("Không thể xác định người dùng hiện tại");
@@ -52,7 +56,12 @@ public class Video_controller extends HttpServlet {
 
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
+        int videoId = Integer.valueOf(request.getParameter("videoId")) ;
+        HttpSession session = request.getSession();
+        Users user = (Users)session.getAttribute("user");
+        
+    	DAO_Favorite dao_Favorite = new DAO_Favorite();
+        dao_Favorite.toggleFavorite(user.getId(), videoId);
     }
     
     private Users getCurrentUser(HttpServletRequest request) {
