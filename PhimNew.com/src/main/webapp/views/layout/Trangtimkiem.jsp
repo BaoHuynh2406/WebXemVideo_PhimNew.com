@@ -19,10 +19,10 @@
 
 
 
-	<div class="container d-flex flex-column align-items-center" style="margin-top: 100px;">
+	<div class="container d-flex flex-column align-items-center" style="margin-top: 100px; min-height: 600px;">
 
 		<div class="card my-3 col-10 videoitem" ng-repeat="v in videos">
-			<a href="/PhimNew/home/video?id={{v.Id}}"
+			<a href="#!/watch?id={{v.Id}}"
 				style="border-radius: 20px; box-shadow: 0 0 15px rgba(10, 10, 10, 0.3);">
 				<div class="row g-0">
 					<div class="col-md-4">
@@ -32,9 +32,7 @@
 						<div class="card-body">
 							<h5 class="card-title">{{v.title}}</h5>
 							<p style="max-height: 100px; overflow-y: auto;" class="card-text">{{v.des}}</p>
-							<span  class=" fs-7">{{v.views | number}}<i class="far fa-eye ms-1 me-3"></i>{{100 |
-								number}}<i style="color: red;" class="ms-1 bi bi-heart-fill"></i>
-							</span>
+							<span class="fs-7">Lượt xem: {{v.views | number}}</span>
 						</div>
 					</div>
 				</div>

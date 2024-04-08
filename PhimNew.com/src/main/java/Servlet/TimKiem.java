@@ -18,7 +18,7 @@ import Entity.Vd;
 import Entity.Video;
 
 
-@WebServlet("/timkiem")
+@WebServlet("/home/timkiem")
 public class TimKiem extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -41,7 +41,7 @@ public class TimKiem extends HttpServlet {
 		
 		
 		try {
-			String NDtimkiem = request.getParameter("nd");
+			String NDtimkiem = request.getParameter("key");
 			System.out.println(NDtimkiem);
 		    DAO_Video daovideo = new DAO_Video();
 		    List<Vd> videos = new ArrayList();

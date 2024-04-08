@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import Entity.Users;
 
-@WebServlet({ "/home" })
+@WebServlet({ "/home" , "/home/watch"})
 public class HomePage_Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -34,16 +34,11 @@ public class HomePage_Controller extends HttpServlet {
 		Users user = null;
 		if(session != null) {
 			 user = (Users) session.getAttribute("user");
-			if (user == null) {
-				response.sendRedirect("/PhimNew/login");
-				return;
-			}
-		}else {
-			response.sendRedirect("/PhimNew/login");
-			return;
-		}
-		
+		}		
 		request.setAttribute("user", user);
+		
+		
+		
 		request.getRequestDispatcher("/views/index.jsp").forward(request, response);
 	}
 
