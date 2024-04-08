@@ -1,31 +1,37 @@
-package Controller;
+package Servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
+
 import DAO.DAO_Video;
 import Entity.Users;
+import Entity.Vd;
 import Entity.Video;
 
 @WebServlet("/home/video")
-public class Video_controller extends HttpServlet {
+public class watchServelet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    public Video_controller() {
+    public watchServelet() {
         super();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
         try {
             int videoId = Integer.valueOf(request.getParameter("id"));
             DAO_Video dao_video = new DAO_Video();
-            Video video = dao_video.findByID(videoId);
-            
-            if (video != null) {
+            Video v = dao_video.findByID(videoId);
+            if (v != null) {
                 Users user = getCurrentUser(request);
                 
                 if (user != null) {
@@ -33,9 +39,11 @@ public class Video_controller extends HttpServlet {
                     dao_video.increaseViewCount(videoId, user);
                     
                     // Lấy video mới nhất sau khi đã tăng số lượt xem
-                    video = dao_video.findByID(videoId);
+                    Vd  video = dao_video.getOnly(v);
                     
-                    request.setAttribute("v", video);
+                    response.setContentType("application/json");
+        			PrintWriter out = response.getWriter();
+        			out.println(new Gson().toJson(video));
                 } else {
                     throw new ServletException("Không thể xác định người dùng hiện tại");
                 }
@@ -47,7 +55,7 @@ public class Video_controller extends HttpServlet {
             request.setAttribute("errorMessage", e.getMessage());
         }
         
-        request.getRequestDispatcher("/views/layout/Video.jsp").forward(request, response);
+        
     }
 
 

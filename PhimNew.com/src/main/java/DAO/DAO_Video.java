@@ -18,7 +18,6 @@ import Entity.Vd;
 import Entity.Video;
 import Utils.JpaUtils;
 
-
 public class DAO_Video extends DAO<Video, Integer> {
 
 	@Override
@@ -94,46 +93,46 @@ public class DAO_Video extends DAO<Video, Integer> {
 	@Override
 	public Video findByID(Integer key) {
 		EntityManager em = JpaUtils.getEntityManager();
-		String jqpl = "Select v from Video v where v.Id = :getVidID";//parameter not String key
-		TypedQuery<Video> query = em.createQuery(jqpl,Video.class);
+		String jqpl = "Select v from Video v where v.Id = :getVidID";// parameter not String key
+		TypedQuery<Video> query = em.createQuery(jqpl, Video.class);
 		query.setParameter("getVidID", key);
 		return query.getSingleResult();
 	}
-	
+
 	public List<Video> findByTitle(String title) {
 		EntityManager em = JpaUtils.getEntityManager();
 		String jqpl = "Select v from Video v where v.title like :getTitle";
 		TypedQuery<Video> query = em.createQuery(jqpl, Video.class);
-		query.setParameter("getTitle","%"+title+"%");
+		query.setParameter("getTitle", "%" + title + "%");
 		return query.getResultList();
 	}
-	
-	public List<Video> findFavoriteVidsByUserID(String id){
+
+	public List<Video> findFavoriteVidsByUserID(String id) {
 		EntityManager em = JpaUtils.getEntityManager();
-		String jqpl = "Select f.video from Favorite f where f.user.userID = :userID ";
+		String jqpl = "Select f.video from Favorite f where f.user.id = :userID ";
 		TypedQuery<Video> query = em.createQuery(jqpl, Video.class);
 		query.setParameter("userID", id);
 		return query.getResultList();
 	}
-	
+
 	public List<Video> findFavoriteVidsByTitle(String title) {
 		EntityManager em = JpaUtils.getEntityManager();
 		String jqpl = "Select DISTINCT f.video from Favorite f where f.video.title like :getTitle";
 		TypedQuery<Video> query = em.createQuery(jqpl, Video.class);
-		query.setParameter("getTitle","%"+title+"%");
+		query.setParameter("getTitle", "%" + title + "%");
 		return query.getResultList();
 	}
-	
-	public List<Video> favoriteNotFavorite(boolean loveOrNot){
+
+	public List<Video> favoriteNotFavorite(boolean loveOrNot) {
 		EntityManager em = JpaUtils.getEntityManager();
 		String jqpl = "Select v from Video v where v.favorites IS EMPTY";
-		if(loveOrNot) {
+		if (loveOrNot) {
 			jqpl = "Select v from Video v where v.favorites IS NOT EMPTY";
 		}
 		TypedQuery<Video> query = em.createQuery(jqpl, Video.class);
 		return query.getResultList();
 	}
-	
+
 	public List<Video> findVideoActive(boolean isActive) {
 		EntityManager em = JpaUtils.getEntityManager();
 		String jqpl = "Select v from Video v where v.active =:isActive";
@@ -141,29 +140,31 @@ public class DAO_Video extends DAO<Video, Integer> {
 		query.setParameter("isActive", isActive);
 		return query.getResultList();
 	}
-	
-	
+
 	// B�i 3
-	public List<Video> findByUser(String id){
+	public List<Video> findByUser(String id) {
 		EntityManager em = JpaUtils.getEntityManager();
 		TypedQuery<Video> query = em.createNamedQuery("Video.findByUser", Video.class);
 		query.setParameter("getUserID", id);
 		return query.getResultList();
 	}
-	public List<Video> findVideoByTitle(String vidTitle){
+
+	public List<Video> findVideoByTitle(String vidTitle) {
 		EntityManager em = JpaUtils.getEntityManager();
 		TypedQuery<Video> query = em.createNamedQuery("Video.findVideoByTitles", Video.class);
 		query.setParameter("getVideoTitle", vidTitle);
 		return query.getResultList();
 	}
-	public List<Video> findVideoFromRange(Date dateA, Date dateB){
+
+	public List<Video> findVideoFromRange(Date dateA, Date dateB) {
 		EntityManager em = JpaUtils.getEntityManager();
 		TypedQuery<Video> query = em.createNamedQuery("Video.favoriteVidsInRange", Video.class);
 		query.setParameter("getMinDate", dateA);
 		query.setParameter("getMaxDate", dateB);
 		return query.getResultList();
 	}
-	public List<Video> findInMonths(String[] months){
+
+	public List<Video> findInMonths(String[] months) {
 		EntityManager em = JpaUtils.getEntityManager();
 		String sql = "Select DISTINCT f.video from Favorite f where month(f.likeDate) in (:months)";
 		List<Integer> listMonth = new ArrayList<Integer>();
@@ -174,63 +175,66 @@ public class DAO_Video extends DAO<Video, Integer> {
 		query.setParameter("months", listMonth);
 		return query.getResultList();
 	}
-	//Bai 4
+
+	// Bai 4
 	@SuppressWarnings("unchecked")
-	public List<Video> rand5Vids(){
+	public List<Video> rand5Vids() {
 		EntityManager em = JpaUtils.getEntityManager();
 		javax.persistence.Query query = em.createNamedQuery("Report.random5");
 		return query.getResultList();
 	}
+
 	public void increaseViewCount(Integer videoId, Users user) {
-	    EntityManager em = JpaUtils.getEntityManager();
-	    EntityTransaction tran = em.getTransaction();
+		EntityManager em = JpaUtils.getEntityManager();
+		EntityTransaction tran = em.getTransaction();
 
-	    try {
-	        tran.begin();
-	        Video video = em.find(Video.class, videoId);
-	        if (video != null) {
-	            int currentViews = video.getViews();
-	            video.setViews(currentViews + 1);
-	            em.merge(video);
-	            tran.commit();
-	            
-	            // Gọi trực tiếp phương thức thêm vào lịch sử
-	            // tìm id
-	            Integer videoID = video.getId();
+		try {
+			tran.begin();
+			Video video = em.find(Video.class, videoId);
+			if (video != null) {
+				int currentViews = video.getViews();
+				video.setViews(currentViews + 1);
+				em.merge(video);
+				tran.commit();
 
-	            // thêm vào bảng History
-	            DAO_History daoHistory = new DAO_History();
-	            History history = new History();
-	            history.setUser(user);
-	            history.setVideo(video);
-	            daoHistory.insert(history);
+				// Gọi trực tiếp phương thức thêm vào lịch sử
+				// tìm id
+				Integer videoID = video.getId();
 
-	        } else {
-	            throw new Exception("Video not found!");
-	        }
-	    } catch (Exception e) {
-	        if (tran != null && tran.isActive()) {
-	            tran.rollback();
-	        }
-	        e.printStackTrace();
-	    } finally {
-	        em.close();
-	    }
-	}
-	
-	public List<Vd> getOnly(List<Video> list){
-		List<Vd> listReturn = new ArrayList();
-		for(Video v : list) {
-			listReturn.add(new Vd(
-					v.getId(), v.getTitle(), v.getPoster(), v.getViews(), v.getDes(),
-					v.isActive(), v.getUrl()
-					));
+				// thêm vào bảng History
+				DAO_History daoHistory = new DAO_History();
+				History history = new History();
+				history.setUser(user);
+				history.setVideo(video);
+				daoHistory.insert(history);
+
+			} else {
+				throw new Exception("Video not found!");
+			}
+		} catch (Exception e) {
+			if (tran != null && tran.isActive()) {
+				tran.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			em.close();
 		}
-		
+	}
+
+	public List<Vd> getOnly(List<Video> list) {
+		List<Vd> listReturn = new ArrayList();
+		for (Video v : list) {
+			listReturn.add(
+					new Vd(v.getId(), v.getTitle(), v.getPoster(), v.getViews(), v.getDes(), v.isActive(), v.getUrl()));
+		}
+
 		return listReturn;
 	}
 
-
+	public Vd getOnly(Video v) {
+		Vd o = new Vd(v.getId(), v.getTitle(), v.getPoster(), v.getViews(), v.getDes(), v.isActive(), v.getUrl());
+		return o;
+	}
 
 //	@SuppressWarnings("unchecked")
 //	public List<TemporaryClass> reportFavoriteByYear(Integer year){
@@ -240,5 +244,5 @@ public class DAO_Video extends DAO<Video, Integer> {
 //		query.setParameter("year", year);
 //		return query.getResultList();
 //	}
-	
+
 }

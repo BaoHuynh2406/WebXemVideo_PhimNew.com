@@ -34,15 +34,14 @@
 
             </head>
 
-            <body ng-app="PhimNew" ng-controller="main_controller">
+            <body ng-app="PhimNew" ng-controller="mainCtrl">
                 <!-- Header -->
                 <header class="header p-3 mb-1 border-bottom " id="header">
                     <%@include file="layout/header.jsp" %>
                 </header>
 
                 <main>
-                    <div ng-view></div>
-
+                    <ng-view></ng-view>
                 </main>
 
 
@@ -61,47 +60,53 @@
 
             <script>
                 var app = angular.module('PhimNew', ["ngRoute"]);
-
                 app.config(function ($routeProvider) {
                     $routeProvider
+                        .when("/home", {
+                            templateUrl: "views/layout/HomePage.jsp",
+                            controller: "homeCtrl"
+                        })
                         .when("/timkiem", {
                             templateUrl: "views/layout/Trangtimkiem.jsp",
-                            controller: "Block_video"
+                            controller: "findCtrl"
                         })
-                        .when("/watch",{
-                            templateUrl: "views/layout/watch.html",
-                            controller: "Block_video"
+                        .when("/watch", {
+                            templateUrl: "views/watch.jsp",
+                            controller: "watchCtrl"
                         })
                         .otherwise({
-                            templateUrl: "views/layout/HomePage.html",
-                            controller: "Block_video"
+                            redirectTo: '/home',
+                            controller: "homeCtrl"
                         });
                 });
-
-                app.controller('main_controller', function ($scope, $http) {
+                app.controller('mainCtrl', function ($scope, $location, $http, $routeParams, $rootScope) {
+                    console.log('loading');
+                    // Định nghĩa hoặc truyền biến key tại đây
                     $scope.timkiem = function () {
-                        window.location.href = "#!/timkiem";
-
-                        $http.get('/PhimNew/timkiem', { params: { nd: $scope.nd } })
-                            .then(function (response) {
-                                $scope.videos = response.data;
-                            })
-                            .catch(function (error) {
-
-                                console.error('Error loading items:', error);
-                            });
+                        $rootScope.nd = $scope.nd;
+                        $location.path('/timkiem').search({ key: $scope.nd });
                     };
                 });
 
-                app.controller('Block_video', function ($scope, $http) {
 
-                    // Gọi hàm loadItems khi trang web vừa được load
-                    $scope.$on('$viewContentLoaded', function () {
-                        loadItems('made_for_you');
-                        loadItemsTrend('nhieu_luot_xem');
-                        console.log('chạy cái này');
-                    });
+                app.controller('findCtrl', function ($scope, $http, $routeParams, $rootScope) {
+                    var key = $routeParams.key;
+                    $scope.search = function () {
+                        $rootScope.nd = key;
+                        $http.get('/PhimNew/home/timkiem', { params: { key: key } })
+                            .then(function (response) {
+                                $scope.videos = response.data;
+                                console.log('tìm: ' + key);
+                            })
+                            .catch(function (error) {
+                                console.error('Error loading items:', error);
+                            });
+                    };
+                    $scope.search();
+                });
 
+
+                app.controller('homeCtrl', function ($scope, $http) {
 
                     $scope.loadItems = function (tab) {
                         $scope.selectedTab = tab;
@@ -116,6 +121,8 @@
                                 console.error('Error loading items:', error);
                             });
                     };
+
+                    $scope.loadItems("made_for_you");
 
                     $scope.loadItemsTrend = function (tab) {
                         $scope.selectedTabTrend = tab;
@@ -132,10 +139,28 @@
                             });
                     };
 
-                   
+
                 });
 
 
+                app.controller('watchCtrl', function ($scope, $http, $routeParams, $sce) {
+                    var id = $routeParams.id;
+                
+                    $scope.loadVideo = function () {
+                        $http.get('/PhimNew/home/video', { params: { id: id } })
+                            .then(function (response) {
+                                $scope.video = response.data;
+                                console.log('load: ' + $scope.video.title);
+                                $scope.url = 'https://www.youtube.com/embed/'+$scope.video.url;
+                                $scope.url = $sce.trustAsResourceUrl($scope.url);
+                            })
+                            .catch(function (error) {
+                                console.error('Error loading items:', error);
+                            });
+                    };
+
+                    $scope.loadVideo();
+                });
             </script>
 
             </html>

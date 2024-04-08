@@ -19,10 +19,10 @@
 
 
 
-	<div class="container d-flex flex-column align-items-center" style="margin-top: 100px;">
+	<div class="container d-flex flex-column align-items-center" style="margin-top: 100px; min-height: 600px;">
 
 		<div class="card my-3 col-10 videoitem" ng-repeat="v in videos">
-			<a href="/PhimNew/home/video?id={{v.Id}}"
+			<a href="#!/watch?id={{v.Id}}"
 				style="border-radius: 20px; box-shadow: 0 0 15px rgba(10, 10, 10, 0.3);">
 				<div class="row g-0">
 					<div class="col-md-4">

@@ -22,10 +22,10 @@ import Entity.Vd;
 import Entity.Video;
 
 @WebServlet("/VideoLoad")
-public class VideoServlet extends HttpServlet {
+public class getVideos extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public VideoServlet() {
+	public getVideos() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
