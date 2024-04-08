@@ -80,6 +80,7 @@ public class DAO_History extends DAO<History, Integer> {
 		return histories;
 	}
 
+<<<<<<< Updated upstream
 	@Override
 	public History findByID(Integer key) {
 		EntityManager entityManager = JpaUtils.getEntityManager();
@@ -112,4 +113,19 @@ public class DAO_History extends DAO<History, Integer> {
 		return null;
 	}
 
+=======
+    @Override
+    public History findByID(Integer key) {
+        EntityManager entityManager = JpaUtils.getEntityManager();
+        History history = null;
+        try {
+            history = entityManager.find(History.class, key);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            entityManager.close();
+        }
+        return history;
+    }
+>>>>>>> Stashed changes
 }
