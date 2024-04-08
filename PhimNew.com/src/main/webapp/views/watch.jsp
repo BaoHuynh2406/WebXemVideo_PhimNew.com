@@ -18,16 +18,19 @@
 
                 </div>
                 <div class="flex-direction-end">
-                  <button class="share-btn btn nut  mx-2"><i style="color: red" class="bi bi-heart-fill"></i> 100
-                  </button>
-                  <button class="share-btn btn nut "><i style="color: rgb(10, 36, 152);" class="fas fa-share-alt"></i>
-                    Chia sẻ</button>
+                    <button type="submit" class="btn-like btn nut mx-2" ng-click="toggleLike()">
+                      <i ng-class="{'bi bi-heart': !isLiked, 'bi bi-heart-fill': isLiked}"
+                        style="color: {{isLiked ? 'red' : 'black'}}"></i> {{likeNum}}
+                    </button>
+                    <button class="share-btn btn nut "><i style="color: rgb(10, 36, 152);" class="fas fa-share-alt"></i>
+                      Chia sẻ</button>
                 </div>
               </div>
               <div class="col-12">
                 <hr>
                 <div class="col-12 p-2" style="border-radius: 10px; background-color: #ededed;">
-                  <span class="mb-1 fw-bold" style="font-size: 14px; color:#333;">{{video.views}} lượt xem  -  2 ngày trước</span>
+                  <span class="mb-1 fw-bold" style="font-size: 14px; color:#333;">{{video.views}} lượt xem - 2 ngày
+                    trước</span>
                   <p>{{video.des}}</p>
                 </div>
               </div>
@@ -43,6 +46,6 @@
               </div>
             </div>
           </div>
-        
+
         </div>
       </div>

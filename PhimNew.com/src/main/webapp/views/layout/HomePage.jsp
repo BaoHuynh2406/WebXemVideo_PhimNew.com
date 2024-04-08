@@ -76,8 +76,7 @@
                     <div class="card-body">
                       <h5 class="card-title fs-5 mb-2">{{v.title}}</h5>
                       <div class="mb-1">
-                        <span class=" fs-7">{{v.views | number}}<i class="far fa-eye ms-1 me-3"></i>{{100 | number}}<i
-                            style="color: red;" class="ms-1 bi bi-heart-fill"></i>
+                        <span class="fs-7">Lượt xem: {{v.views | number}}
                         </span>
                       </div>
                     </div>
@@ -116,9 +115,7 @@
                     <div class="card-body">
                       <h5 class="card-title fs-5 mb-2">{{v.title}}</h5>
                       <div class="mb-1">
-                        <span class=" fs-7">{{v.views | number}}<i class="far fa-eye ms-1 me-3"></i>{{100 | number}}<i
-                            style="color: red;" class="ms-1 bi bi-heart-fill"></i>
-                        </span>
+                        <span class="fs-7">Lượt xem: {{v.views | number}}</span>
                       </div>
                     </div>
                   </div>

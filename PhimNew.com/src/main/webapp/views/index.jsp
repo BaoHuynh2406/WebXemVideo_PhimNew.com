@@ -145,13 +145,25 @@
 
                 app.controller('watchCtrl', function ($scope, $http, $routeParams, $sce) {
                     var id = $routeParams.id;
-                
+                    $scope.likeNum = 0;
+
                     $scope.loadVideo = function () {
+
+                        // Kiểm tra trạng thái like của video
+                        $http.get('/PhimNew/home/watch/CheckLike', { params: { id: id } })
+                            .then(function (response) {
+                                $scope.isLiked = response.data.isLiked;
+                                $scope.likeNum = response.data.likeNum;
+                            })
+                            .catch(function (error) {
+                                console.error('Error checking like status:', error);
+                            });
+
                         $http.get('/PhimNew/home/video', { params: { id: id } })
                             .then(function (response) {
                                 $scope.video = response.data;
                                 console.log('load: ' + $scope.video.title);
-                                $scope.url = 'https://www.youtube.com/embed/'+$scope.video.url;
+                                $scope.url = 'https://www.youtube.com/embed/' + $scope.video.url;
                                 $scope.url = $sce.trustAsResourceUrl($scope.url);
                             })
                             .catch(function (error) {
@@ -159,7 +171,22 @@
                             });
                     };
 
+
                     $scope.loadVideo();
+
+                    $scope.toggleLike = function(){
+                        $http.post('/PhimNew/home/video?id=' + id)
+                        .then(function (response) {
+                            $scope.isLiked = !$scope.isLiked;
+                            $scope.likeNum = response.data;
+                            console.log($scope.isLiked);
+                        })
+                        .catch(function (error) {
+                            console.error('Error toggling like:', error);
+                        });
+                    }
+
+                    
                 });
             </script>
 

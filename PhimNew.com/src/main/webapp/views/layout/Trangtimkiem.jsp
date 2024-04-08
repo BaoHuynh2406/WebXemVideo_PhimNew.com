@@ -32,9 +32,7 @@
 						<div class="card-body">
 							<h5 class="card-title">{{v.title}}</h5>
 							<p style="max-height: 100px; overflow-y: auto;" class="card-text">{{v.des}}</p>
-							<span  class=" fs-7">{{v.views | number}}<i class="far fa-eye ms-1 me-3"></i>{{100 |
-								number}}<i style="color: red;" class="ms-1 bi bi-heart-fill"></i>
-							</span>
+							<span class="fs-7">Lượt xem: {{v.views | number}}</span>
 						</div>
 					</div>
 				</div>
