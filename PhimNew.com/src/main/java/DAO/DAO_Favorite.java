@@ -66,7 +66,6 @@ public class DAO_Favorite extends DAO<Favorite, Long> {
 		TypedQuery<Integer> query = em.createNamedQuery("GetYear.FavoriteVideos", Integer.class);
 		return query.getResultList();
 	}
-
 	// yêu thích
 	public void toggleFavorite(String userId, int videoId) {
 
