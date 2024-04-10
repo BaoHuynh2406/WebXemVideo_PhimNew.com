@@ -143,9 +143,46 @@
                 });
 
 
-                app.controller('watchCtrl', function ($scope, $http, $routeParams, $sce) {
+                app.controller('watchCtrl', function ($scope, $location, $http, $routeParams, $sce) {
                     var id = $routeParams.id;
                     $scope.likeNum = 0;
+
+                    $scope.share = function () {
+                        var email = document.getElementById('inputEmail').value;
+                        var emailValue = email;
+
+                        // Lấy id của video từ URL
+                        var videoId = getVideoIdFromUrl();
+
+                        var url = $location.absUrl();
+                        var id = $scope.id;
+
+                        $http.get('/PhimNew/home/share', { params: { e: emailValue, conten: url, id: id, videoId: videoId } })
+                            .then(function (response) {
+                                console.log("đã gửi " + emailValue + '- ' + url + '-' + id + '-' + videoId);
+                            })
+                            .catch(function (error) {
+                                console.error('Error checking like status:', error);
+                            });
+                    }
+
+                    // Hàm để lấy id của video từ URL
+                    function getVideoIdFromUrl() {
+                        var currentUrl = window.location.href;
+                        var urlParts = currentUrl.split('?');
+                        if (urlParts.length > 1) {
+                            var query = urlParts[1];
+                            var queryParams = query.split('&');
+                            for (var i = 0; i < queryParams.length; i++) {
+                                var param = queryParams[i].split('=');
+                                if (param[0] === 'id') {
+                                    return param[1];
+                                }
+                            }
+                        }
+                        return null; // Trả về null nếu không tìm thấy id
+                    }
+
 
                     $scope.loadVideo = function () {
 
@@ -174,19 +211,19 @@
 
                     $scope.loadVideo();
 
-                    $scope.toggleLike = function(){
+                    $scope.toggleLike = function () {
                         $http.post('/PhimNew/home/video?id=' + id)
-                        .then(function (response) {
-                            $scope.isLiked = !$scope.isLiked;
-                            $scope.likeNum = response.data;
-                            console.log($scope.isLiked);
-                        })
-                        .catch(function (error) {
-                            console.error('Error toggling like:', error);
-                        });
+                            .then(function (response) {
+                                $scope.isLiked = !$scope.isLiked;
+                                $scope.likeNum = response.data;
+                                console.log($scope.isLiked);
+                            })
+                            .catch(function (error) {
+                                console.error('Error toggling like:', error);
+                            });
                     }
 
-                    
+
                 });
             </script>
 
