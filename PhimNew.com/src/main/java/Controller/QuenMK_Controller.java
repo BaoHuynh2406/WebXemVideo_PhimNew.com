@@ -13,9 +13,6 @@ import DAO.DAO_User;
 import Entity.Users;
 import Utils.senemail;
 
-/**
- * Servlet implementation class QuenMK_Controller
- */
 @WebServlet("/QuenMK")
 public class QuenMK_Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -26,9 +23,6 @@ public class QuenMK_Controller extends HttpServlet {
        
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("utf-8");
