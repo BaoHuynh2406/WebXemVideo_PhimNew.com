@@ -78,6 +78,11 @@
 			<version>2.13.0</version> <!-- Thay version bằng phiên bản mới nhất
 			của Jackson Databind -->
 		</dependency>
+			<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-email</artifactId>
+			<version>1.5</version>
+		</dependency>
 
 
 	</dependencies>
