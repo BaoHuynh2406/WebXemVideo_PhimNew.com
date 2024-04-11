@@ -208,6 +208,13 @@ html, body {
                                 <input type="file" class="custom-file-input" id="inputGroupFile04"  name="poster">
                                 </div>
                            </div> 
+                           <div class="col-md-12">
+                           
+						    <input class="form-control" type="text" name="url" placeholder="URL" required value="${video.url}">
+						    <div class="valid-feedback">URL field is valid!</div>
+						    <div class="invalid-feedback">URL field cannot be blank!</div>
+						</div>
+                           
                             </div>
                            <div class="col" style="width: 0px">
                             <c:if test="${not empty video.poster}">

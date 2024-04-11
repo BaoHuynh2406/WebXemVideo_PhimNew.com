@@ -79,43 +79,46 @@ public class Controller_Video extends HttpServlet {
 	}
 	
 	private void create(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
-			Video video = new Video();
-			BeanUtils.populate(video, request.getParameterMap());
-			
-			File dir = new File(request.getServletContext().getRealPath("/img"));
-			
-			if(!dir.exists()) {
-				dir.mkdirs();
-			}
-			
-			Part videoImage = request.getPart("poster");		
-			System.out.println("videoImage: "+videoImage);
-			File imageFile = new File(dir,videoImage.getSubmittedFileName());
-			
-			File dst = new File("ASM_JV4_WebsiteXemVideo/PhimNew.com/src/main/webapp/views/src/img",imageFile.getName());
-			if(!dst.getParentFile().exists()) {
-				dst.mkdirs();
-			}
-			
-			videoImage.write(imageFile.getAbsolutePath());
-			
-			Path from = Paths.get(imageFile.getAbsolutePath());
-			Path to = Paths.get(dst.getAbsolutePath());
-			Files.copy(from, to,StandardCopyOption.REPLACE_EXISTING);
-			
-			video.setPoster(imageFile.getName());
-			
-			System.out.println("VideoId: "+video.getId()+"|Active: "+video.isActive()+"|Des: "+video.getDes()+"|Poster: "+video.getPoster()+"|Title: "+video.getTitle()+"|Views: "+video.getViews());
-			daovd.insert(video);
-			request.setAttribute("message", "Video created Successfully!");
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			request.setAttribute("message", "Database Error or VideoID existed!");
-		}
-	}
-	
+    try {
+        Video video = new Video();
+        BeanUtils.populate(video, request.getParameterMap());
+
+        // Thêm URL từ request vào đối tượng video
+        video.setUrl(request.getParameter("url"));
+
+        File dir = new File(request.getServletContext().getRealPath("/img"));
+
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+
+        Part videoImage = request.getPart("poster");
+        System.out.println("videoImage: " + videoImage);
+        File imageFile = new File(dir, videoImage.getSubmittedFileName());
+
+        File dst = new File("ASM_JV4_WebsiteXemVideo/PhimNew.com/src/main/webapp/views/src/img", imageFile.getName());
+        if (!dst.getParentFile().exists()) {
+            dst.mkdirs();
+        }
+
+        videoImage.write(imageFile.getAbsolutePath());
+
+        Path from = Paths.get(imageFile.getAbsolutePath());
+        Path to = Paths.get(dst.getAbsolutePath());
+        Files.copy(from, to, StandardCopyOption.REPLACE_EXISTING);
+
+        video.setPoster(imageFile.getName());
+
+        System.out.println("VideoId: " + video.getId() + "|Active: " + video.isActive() + "|Des: " + video.getDes() + "|Poster: " + video.getPoster() + "|Title: " + video.getTitle() + "|Views: " + video.getViews() + "|URL: " + video.getUrl());
+        daovd.insert(video);
+        request.setAttribute("message", "Video created Successfully!");
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        request.setAttribute("message", "Database Error or VideoID existed!");
+    }
+}
+
 	private void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			Video video = new Video();
