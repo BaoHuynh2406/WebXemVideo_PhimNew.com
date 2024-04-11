@@ -7,6 +7,8 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
 import Entity.Share;
+import Entity.Users;
+import Entity.Video;
 import Utils.JpaUtils;
 
 public class DAO_Share extends DAO<Share, Integer> {
@@ -84,4 +86,29 @@ public class DAO_Share extends DAO<Share, Integer> {
         entityManager.close();
         return share;
     }
+    
+    public void insertShare(Share entity, String userId, int videoId) {
+        EntityManager entityManager = JpaUtils.getEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        try {
+            transaction.begin();
+            Users user = entityManager.find(Users.class, userId);
+            Video video = entityManager.find(Video.class, videoId);
+            if (user != null && video != null) {
+                entity.setUser(user);
+                entity.setVideo(video);
+                entityManager.persist(entity);
+            }
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            entityManager.close();
+        }
+    }
+
+
 }

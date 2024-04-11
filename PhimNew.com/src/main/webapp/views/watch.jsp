@@ -22,9 +22,7 @@
 										<i ng-class="{'bi bi-heart': !isLiked, 'bi bi-heart-fill': isLiked}"
 											style="color: {{isLiked ? 'red' : 'black'}}"></i> {{likeNum}}
 									</button>
-									<!-- <button class="share-btn btn nut "><i style="color: rgb(10, 36, 152);" class="fas fa-share-alt"></i>
-                      Chia sẻ</button> -->
-									<!-- Button trigger modal -->
+									
 									<button type="button" class="share-btn btn nut" data-bs-toggle="modal"
 										data-bs-target="#staticBackdrop">
 										<i style="color: rgb(10, 36, 152);" class="fas fa-share-alt"></i> Chia sẻ
@@ -43,14 +41,15 @@
 														aria-label="Close"></button>
 												</div>
 												<div class="modal-body">
-													<label for="to" class="form-label">Đến</label> <input type="email"
-														class="form-control" name="to" placeholder="Nhập Email"
+													<label for="to" class="form-label">Đến (Các email cách nhau bằng dấu phẩy)</label> 
+													<input id="inputEmail" type="email"
+														class="form-control"  placeholder="Nhập Email"
 														required>
 												</div>
 												<div class="modal-footer">
 													<button type="button" class="btn btn-secondary"
 														data-bs-dismiss="modal">Close</button>
-													<button type="button" class="btn btn-primary">Send Email</button>
+													<button type="button" ng-click="share()" class="btn btn-primary">Send Email</button>
 												</div>
 											</div>
 										</div>
