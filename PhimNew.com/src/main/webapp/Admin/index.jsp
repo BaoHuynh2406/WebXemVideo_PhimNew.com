@@ -330,6 +330,7 @@
 
                     // Function to open edit modal and populate user data
                     $scope.openEditModal = function (user) {
+                        console.log('Selected user:', user);
                         $scope.editedUser = angular.copy(user); // Clone user object to prevent modifying original data
                         $('#editUserModal').modal('show');
                     };

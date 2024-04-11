@@ -60,15 +60,15 @@
                                             <span class="me-2">Gender: </span>
                                             <div class="d-flex">
                                                 <div class="form-check" style="margin-right: 10px;">
-                                                    <input ng-model="editedUser.gender" class="form-check-input"
-                                                        type="radio" name="gender" id="genderMale" value="true">
+                                                    <input ng-model="editedUser.gender" class="form-check-input" type="radio" name="gender" id="genderMale" value="true" ng-checked="editedUser.gender === true">
+
                                                     <label class="form-check-label" for="genderMale">
                                                         Nam
                                                     </label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input ng-model="editedUser.gender" class="form-check-input"
-                                                        type="radio" name="gender" id="genderFemale" value="false">
+                                                    <input ng-model="editedUser.gender" class="form-check-input" type="radio" name="gender" id="genderFemale" value="false" ng-checked="editedUser.gender === false">
+
                                                     <label class="form-check-label" for="genderFemale">
                                                         Nữ
                                                     </label>
@@ -96,15 +96,15 @@
                                             <span class="me-2">Role: </span><br>
                                             <div class="d-flex">
                                                 <div class="form-check" style="margin-right: 10px;">
-                                                    <input ng-model="editedUser.admin" class="form-check-input"
-                                                        type="radio" name="role" id="roleAdmin" value="true">
+                                                    <input ng-model="editedUser.admin" class="form-check-input" type="radio" name="role" id="roleAdmin" value="true" ng-checked="editedUser.admin === true">
+ 
                                                     <label class="form-check-label" for="roleAdmin">
                                                         Admin
                                                     </label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input ng-model="editedUser.admin" class="form-check-input"
-                                                        type="radio" name="role" id="roleUser" value="false">
+                                                    <input ng-model="editedUser.admin" class="form-check-input" type="radio" name="role" id="roleUser" value="false" ng-checked="editedUser.admin === false">
+
                                                     <label class="form-check-label" for="roleUser">
                                                         User
                                                     </label>
