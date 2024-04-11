@@ -137,7 +137,6 @@ public class User_Controller extends HttpServlet {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-
 			request.setAttribute("error", "Error: " + e.getMessage());
 		}
 	}

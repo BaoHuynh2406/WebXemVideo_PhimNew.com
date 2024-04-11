@@ -18,7 +18,7 @@ import com.google.gson.Gson;
 import DAO.DAO_History;
 import DAO.DAO_Video;
 import Entity.Users;
-import Entity.Vd;
+import Entity.VideoOnly;
 import Entity.Video;
 
 @WebServlet("/VideoLoad")
@@ -47,7 +47,7 @@ public class getVideos extends HttpServlet {
 		DAO_Video dao = new DAO_Video();
 		DAO_History daoH = new DAO_History();
 		// Tạo danh sách các video tương ứng với tab
-		List<Vd> videos = new ArrayList();
+		List<VideoOnly> videos = new ArrayList();
 		try {
 			if ("made_for_you".equals(tab)) {
 				videos = dao.getOnly(dao.findVideoActive(true));

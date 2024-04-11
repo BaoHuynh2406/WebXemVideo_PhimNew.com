@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import DAO.DAO_Video;
-import Entity.Vd;
+import Entity.VideoOnly;
 import Entity.Video;
 
 
@@ -44,7 +44,7 @@ public class TimKiem extends HttpServlet {
 			String NDtimkiem = request.getParameter("key");
 			System.out.println(NDtimkiem);
 		    DAO_Video daovideo = new DAO_Video();
-		    List<Vd> videos = new ArrayList();
+		    List<VideoOnly> videos = new ArrayList();
 		    videos =daovideo.getOnly( daovideo.findByTitle(NDtimkiem));
 		    System.out.println(videos.get(0).getTitle());
 		    

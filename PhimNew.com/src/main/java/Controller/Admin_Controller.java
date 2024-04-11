@@ -22,7 +22,7 @@ public class Admin_Controller extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/Admin/index.html").forward(request, response);
+		request.getRequestDispatcher("/Admin/index.jsp").forward(request, response);
 	}
 
 	/**

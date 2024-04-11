@@ -1,11 +1,13 @@
 package DAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
+import Entity.UserOnly;
 import Entity.Users;
 import Utils.JpaUtils;
 
@@ -119,5 +121,20 @@ public class DAO_User extends DAO<Users,String>{
 		TypedQuery<Users> query = em.createQuery(jqpl,Users.class);
 		query.setParameter("getVidID", vidID);
 		return query.getResultList();
+	}
+	
+	public List<UserOnly> getOnly(List<Users> list) {
+		List<UserOnly> listReturn = new ArrayList<UserOnly>();
+		for (Users v : list) {
+			listReturn.add(
+					new UserOnly(v.getId(), v.getPassword(), v.getEmail(), v.isGender(), v.getFullName(), v.getBirthday(), v.isAdmin()));
+		}
+
+		return listReturn;
+	}
+
+	public UserOnly getOnly(Users v) {
+		UserOnly o = new UserOnly(v.getId(), v.getPassword(), v.getEmail(), v.isGender(), v.getFullName(), v.getBirthday(), v.isAdmin());
+		return o;
 	}
 }

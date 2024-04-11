@@ -2,7 +2,7 @@ package Entity;
 
 import javax.persistence.Column;
 
-public class Vd {
+public class VideoOnly {
 private int Id;
 	
 	
@@ -94,12 +94,12 @@ private int Id;
 	}
 
 
-	public Vd() {
+	public VideoOnly() {
 		super();
 	}
 
 
-	public Vd(int id, String title, String poster, int views, String des, boolean active, String url) {
+	public VideoOnly(int id, String title, String poster, int views, String des, boolean active, String url) {
 		super();
 		Id = id;
 		this.title = title;

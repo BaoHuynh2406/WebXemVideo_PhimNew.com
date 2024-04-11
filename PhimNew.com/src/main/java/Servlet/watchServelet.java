@@ -15,7 +15,7 @@ import com.google.gson.Gson;
 import DAO.DAO_Favorite;
 import DAO.DAO_Video;
 import Entity.Users;
-import Entity.Vd;
+import Entity.VideoOnly;
 import Entity.Video;
 
 @WebServlet("/home/video")
@@ -42,7 +42,7 @@ public class watchServelet extends HttpServlet {
 					dao_video.increaseViewCount(videoId, user);
 
 					// Lấy video mới nhất sau khi đã tăng số lượt xem
-					Vd video = dao_video.getOnly(v);
+					VideoOnly video = dao_video.getOnly(v);
 
 					response.setContentType("application/json");
 					PrintWriter out = response.getWriter();
