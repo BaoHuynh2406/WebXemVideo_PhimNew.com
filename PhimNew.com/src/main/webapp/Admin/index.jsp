@@ -39,7 +39,7 @@
                     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
                         <!-- Sidebar - Brand -->
-                        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/PhimNew/home">
                             <div class="sidebar-brand-icon rotate-n-15">
                                 <img style="width: 50px; height: 50px;" src="views/src/img/logo12.png" alt="">
                             </div>
@@ -280,6 +280,10 @@
                             templateUrl: "Admin/user.jsp",
                             controller: "userCtrl"
                         })
+                        .when("/video", {
+                            templateUrl: "Admin/video.jsp",
+                            controller: "videoCtrl"
+                        })
                         .otherwise({
                             redirectTo: '/index',
                             controller: "adminCtrl"
@@ -291,7 +295,46 @@
                 });
 
                 app.controller('videoCtrl', function ($scope, $location, $http, $routeParams, $rootScope) {
-                    console.log('loading');
+                    console.log('Load video');
+                    $scope.videos = [];
+
+                    $scope.getAll = function () {
+                        var button = document.getElementById("rotate-button");
+                        button.classList.add("rotate-icon");
+                        $http.get('/PhimNew/admin/allVideo')
+                            .then(function (response) {
+                                $scope.videos = response.data;
+                                button.classList.remove("rotate-icon");
+                            })
+                            .catch(function (error) {
+                                console.error('Error loading items:', error);
+                                button.classList.remove("rotate-icon");
+                            });
+                    }
+
+                    $scope.getAll();
+
+                    // Function to open edit modal and populate user data
+                    $scope.openEditModal = function (video) {
+                        console.log('Selected video:', video);
+                        $scope.vd = angular.copy(video); // Clone user object to prevent modifying original data
+                        $('#editUserModal').modal('show');
+                    };
+
+                    // Function to save changes to user data
+                    $scope.saveChanges = function () {
+                        // Code to update user details in database
+                        // $scope.editedUser contains updated user data
+                        // After updating, close modal
+                        $('#editUserModal').modal('hide');
+                    };
+
+                    // Function to delete user
+                    $scope.deleteUser = function () {
+                        // Code to delete user from database
+                        // After deleting, close modal
+                        $('#editUserModal').modal('hide');
+                    };
 
                 });
 
@@ -312,7 +355,7 @@
                     $scope.getAll = function () {
                         var button = document.getElementById("rotate-button");
                         button.classList.add("rotate-icon");
-                        $http.get('/PhimNew/admin/all')
+                        $http.get('/PhimNew/admin/allUser')
                             .then(function (response) {
                                 $scope.users = response.data;
                                 $scope.users.forEach(function (user) {
